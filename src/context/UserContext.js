@@ -1,4 +1,5 @@
 import React from 'react';
+import createSession from '../api/sessionApi';
 
 var UserStateContext = React.createContext();
 var UserDispatchContext = React.createContext();
@@ -8,6 +9,8 @@ function userReducer(state, action) {
     case 'LOGIN_SUCCESS':
       return { ...state, isAuthenticated: true };
     case 'SIGN_OUT_SUCCESS':
+      return { ...state, isAuthenticated: false };
+    case 'LOGIN_FAILURE':
       return { ...state, isAuthenticated: false };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -45,32 +48,46 @@ function useUserDispatch() {
   return context;
 }
 
-export { UserProvider, useUserState, useUserDispatch, loginUser, signOut };
+export { UserProvider, useUserState, useUserDispatch, loginFunction, signOut };
 
 // ###########################################################
 
-function loginUser(dispatch, login, password, history, setIsLoading, setError) {
+function loginFunction(
+  loginDispatch,
+  email,
+  password,
+  redirect,
+  setIsLoading,
+  setError
+) {
   setError(false);
   setIsLoading(true);
 
-  if (!!login && !!password) {
-    setTimeout(() => {
-      localStorage.setItem('id_token', 1);
-      setError(null);
-      setIsLoading(false);
-      dispatch({ type: 'LOGIN_SUCCESS' });
+  var session = createSession(email, password);
 
-      history.push('/dashboard');
-    }, 2000);
+  if (session.loginSuccessful) {
+    persistSession(session.id, session.token);
+    setError(null);
+    setIsLoading(false);
+    loginDispatch({ type: 'LOGIN_SUCCESS' });
+
+    redirect('/dashboard');
   } else {
-    dispatch({ type: 'LOGIN_FAILURE' });
+    console.log('Login Failed!');
+    loginDispatch({ type: 'LOGIN_FAILURE' });
     setError(true);
     setIsLoading(false);
   }
 }
 
+function persistSession(id, token) {
+  localStorage.setItem('id', id);
+  localStorage.setItem('token', token);
+}
+
 function signOut(dispatch, history) {
-  localStorage.removeItem('id_token');
+  localStorage.removeItem('id');
+  localStorage.removeItem('token');
   dispatch({ type: 'SIGN_OUT_SUCCESS' });
   history.push('/login');
 }
