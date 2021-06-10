@@ -6,5 +6,6 @@ export async function handleResponse(response) {
 }
 
 export async function handleError(error) {
+  console.log(error.message);
   throw error;
 }
