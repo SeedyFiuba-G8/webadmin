@@ -7,7 +7,6 @@ export default async function createSession(email, password) {
       email: email,
       password: password,
     });
-    console.log(`Login successful.`);
     return {
       ...apiResponse,
       loginSuccessful: true,

@@ -29,13 +29,10 @@ function Login(props) {
       <div className={classes.formContainer}>
         <div className={classes.logotypeContainer}>
           <img src={logo} alt='logo' className={classes.logotypeImage} />
-          <Typography className={classes.logotypeText}>
-            {/* nombre */}
-          </Typography>
         </div>
         <div className={classes.form}>
           <Fade in={error}>
-            <Typography color='secondary' className={classes.errorMessage}>
+            <Typography color='error' className={classes.errorMessage}>
               Something is wrong with your login or password :(
             </Typography>
           </Fade>
@@ -127,6 +124,9 @@ const getStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('md')]: {
       display: 'none',
     },
+  },
+  errorMessage: {
+    textAlign: 'center',
   },
   formContainer: {
     width: '60%',

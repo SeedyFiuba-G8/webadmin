@@ -52,7 +52,7 @@ export { UserProvider, useUserState, useUserDispatch, loginFunction, signOut };
 
 // ###########################################################
 
-function loginFunction(
+async function loginFunction(
   loginDispatch,
   email,
   password,
@@ -63,7 +63,7 @@ function loginFunction(
   setError(false);
   setIsLoading(true);
 
-  var session = createSession(email, password);
+  var session = await createSession(email, password);
 
   if (session.loginSuccessful) {
     persistSession(session.id, session.token);
@@ -71,7 +71,9 @@ function loginFunction(
     setIsLoading(false);
     loginDispatch({ type: 'LOGIN_SUCCESS' });
 
-    redirect('/dashboard');
+    console.log('Login Success!');
+
+    redirect('/projects');
   } else {
     console.log('Login Failed!');
     loginDispatch({ type: 'LOGIN_FAILURE' });
