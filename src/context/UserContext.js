@@ -1,5 +1,6 @@
 import React from 'react';
 import createSession from '../api/sessionApi';
+import apiProvider from '../api/utilities/provider';
 
 var UserStateContext = React.createContext();
 var UserDispatchContext = React.createContext();
@@ -20,7 +21,8 @@ function userReducer(state, action) {
 
 function UserProvider({ children }) {
     var [state, dispatch] = React.useReducer(userReducer, {
-        isAuthenticated: !!localStorage.getItem('id_token'),
+        isAuthenticated:
+            !!localStorage.getItem('token') && !!localStorage.getItem('id'),
     });
 
     return (
@@ -85,11 +87,13 @@ async function loginFunction(
 function persistSession(id, token) {
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
+    apiProvider.updateAuthToken();
 }
 
 function signOut(dispatch, history) {
     localStorage.removeItem('id');
     localStorage.removeItem('token');
+    apiProvider.updateAuthToken();
     dispatch({ type: 'SIGN_OUT_SUCCESS' });
     console.log('Signed out.');
     history.push('/login');

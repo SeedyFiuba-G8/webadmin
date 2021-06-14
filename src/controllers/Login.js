@@ -43,7 +43,7 @@ function Login(props) {
                             color='error'
                             className={classes.errorMessage}
                         >
-                            Something is wrong with your login or password :(
+                            Incorrect email or password.
                         </Typography>
                     </Fade>
                     <TextField
@@ -149,7 +149,7 @@ const getStyles = makeStyles((theme) => ({
     logotypeText: {
         color: 'black',
         fontWeight: 500,
-        fontSize: 84,
+        fontSize: 60,
         [theme.breakpoints.down('md')]: {
             fontSize: 48,
         },

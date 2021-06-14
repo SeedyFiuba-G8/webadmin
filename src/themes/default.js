@@ -39,8 +39,8 @@ const defaultTheme = {
             dark: tinycolor(info).darken(darkenRate).toHexString(),
         },
         text: {
-            primary: '#4CBB17',
-            secondary: '#4CBB17',
+            primary: '#4A4A4A',
+            secondary: '#6E6E6E',
             warning: '#FFC260',
             hint: '#B9B9B9',
         },

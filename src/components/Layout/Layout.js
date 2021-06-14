@@ -3,6 +3,8 @@ import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import Projects from '../../controllers/Projects';
 import Users from '../../controllers/Users';
 import Sidebar from '../SideBar/Sidebar';
+import Error from '../../controllers/Error';
+import Project from '../../controllers/Project';
 
 function Layout(props) {
     var classes = getStyles();
@@ -18,9 +20,19 @@ function Layout(props) {
                             path='/app'
                             render={() => <Redirect to='/app/projects' />}
                         />
-                        <Route path='/app/projects' component={Projects} />
-                        <Route path='/app/users' component={Users} />
+                        <Route
+                            exact
+                            path='/app/projects'
+                            component={Projects}
+                        />
+                        <Route
+                            exact
+                            path='/app/projects/:id'
+                            component={Project}
+                        />
+                        <Route exact path='/app/users' component={Users} />
                         {/* Default */}
+                        <Route component={Error} />
                     </Switch>
                 </div>
             </>
