@@ -39,10 +39,16 @@ function Sidebar({ location, history }) {
                 ))}
             </List>
             <Button
-                variant='contained'
-                color='secondary'
+                variant="contained"
+                color="secondary"
                 onClick={() => signOut(userDispatch, history)}
                 startIcon={<LogoutIcon />}
+                // position to define
+                style={{
+                    alignSelf: 'flex-end',
+                    position: 'absolute',
+                    bottom: 20,
+                }}
             >
                 Logout
             </Button>
