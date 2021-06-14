@@ -91,5 +91,6 @@ function signOut(dispatch, history) {
     localStorage.removeItem('id');
     localStorage.removeItem('token');
     dispatch({ type: 'SIGN_OUT_SUCCESS' });
+    console.log('Signed out.');
     history.push('/login');
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, makeStyles } from '@material-ui/core';
 import { withRouter } from 'react-router';
-import ProjectsTable from '../components/ProjectsTable';
+import UsersTable from '../components/UsersTable';
 import PageTitle from '../components/PageTitle';
 
 function Projects(props) {
@@ -9,10 +9,10 @@ function Projects(props) {
 
     return (
         <>
-            <PageTitle title='Projects' />
+            <PageTitle title='Users' />
             <Grid container className={classes.container}>
                 <Grid item xs={12}>
-                    <ProjectsTable />
+                    <UsersTable />
                 </Grid>
             </Grid>
         </>
