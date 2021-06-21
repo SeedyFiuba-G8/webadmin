@@ -1,5 +1,12 @@
-import apiProvider from './utilities/fakeProvider';
+import apiProvider from './utilities/provider';
 
-export function getAllUsers() {
-    return apiProvider.get('user').users;
+export async function getAllUsers() {
+    try {
+        const response = await apiProvider.get('user');
+        return response.users;
+    } catch (error) {
+        console.error(error);
+        console.log("Couldn't get users.");
+        return [];
+    }
 }
