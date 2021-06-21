@@ -23,6 +23,8 @@ function ProjectsTable(props) {
             options={{
                 filterType: 'checkbox',
                 onRowClick: onRowClickAction,
+                // onChangePage:
+                // onChangeRowsPerPage:
             }}
         />
     );
