@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import MUIDataTable from 'mui-datatables';
 import { getAllUsers } from '../api/usersQuery';
-export default function UsersTable(props) {
-    const [users, setUsers] = useState([]);
-    useEffect(() => {
-        const loadUsers = async () => setUsers(await getAllUsers());
-        loadUsers();
-    }, []);
 
+export default function UsersTable(props) {
+    const data = getAllUsers();
     return (
         <MUIDataTable
-            title="All Users"
-            data={users}
+            title='All Users'
+            data={data}
             columns={columns}
             options={{
                 filterType: 'checkbox',
