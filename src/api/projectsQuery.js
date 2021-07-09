@@ -1,8 +1,11 @@
 import apiProvider from './utilities/provider';
 
-export async function getAllProjects() {
+export async function getAllProjects({ rows, page }) {
     try {
-        const project = await apiProvider.get('projects');
+        const project = await apiProvider.get('projects', {
+            limit: rows,
+            offset: rows * (page - 1),
+        });
         return project.projects;
     } catch (error) {
         console.error(error);

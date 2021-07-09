@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import MUIDataTable from 'mui-datatables';
-import { getAllProjects } from '../api/projectsQuery';
+import { getProjects } from '../api/projectsQuery';
 import { withRouter } from 'react-router-dom';
 
 function ProjectsTable(props) {
+    const [config, setConfig] = useState({ rowsPerPage: 3, currentPage: 1 });
     const [projects, setProjects] = useState([]);
     useEffect(() => {
-        const loadProjects = async () => setProjects(await getAllProjects());
+        const loadProjects = async () => setProjects(await getProjects(config));
         loadProjects();
-    }, []);
+    }, [config]);
 
     function onRowClickAction(rowData) {
         const id = rowData[0];
         props.history.push('projects/' + id);
+    }
+
+    function changePage(page) {
+        setConfig({ ...config, currentPage: page });
+    }
+
+    function changeRowsPerPage(rows) {
+        setConfig({ ...config, rowsPerPage: rows });
     }
 
     return (
@@ -23,8 +32,12 @@ function ProjectsTable(props) {
             options={{
                 filterType: 'checkbox',
                 onRowClick: onRowClickAction,
-                // onChangePage:
-                // onChangeRowsPerPage:
+                resizableColumns: true,
+                page: config.currentPage,
+                rowsPerPage: config.rowsPerPage,
+                rowsPerPageOptions: [3, 5, 10, 15, 50],
+                onChangePage: changePage,
+                onChangeRowsPerPage: changeRowsPerPage,
             }}
         />
     );
