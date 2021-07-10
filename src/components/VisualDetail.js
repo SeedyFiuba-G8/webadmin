@@ -15,12 +15,12 @@ const useStyles = makeStyles({
     },
 });
 
-export default function FeaturedPost(props) {
+export default function FeaturedDetail(props) {
     const classes = useStyles();
-    const { title, info } = props;
+    const { title, info, size } = props;
 
     return (
-        <Grid item xs={6} md={3}>
+        <Grid item xs={size}>
             <Card className={classes.card}>
                 <div className={classes.cardDetails}>
                     <CardContent>
@@ -37,7 +37,8 @@ export default function FeaturedPost(props) {
     );
 }
 
-FeaturedPost.propTypes = {
+FeaturedDetail.propTypes = {
+    size: PropTypes.number,
     title: PropTypes.string,
     info: PropTypes.string,
 };
