@@ -9,14 +9,19 @@ export default function UsersTable(props) {
         loadUsers();
     }, []);
 
+    function onRowClickAction(rowData) {
+        const id = rowData[0];
+        props.history.push('users/' + id);
+    }
+
     return (
         <MUIDataTable
-            title='All Users'
+            title="All Users"
             data={users}
             columns={columns}
             options={{
                 filterType: 'checkbox',
-                // onRowClick: viewUsers(),
+                onRowClick: onRowClickAction,
             }}
         />
     );
