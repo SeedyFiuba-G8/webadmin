@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import MUIDataTable from 'mui-datatables';
 import { getAllUsers } from '../api/usersQuery';
+import { withRouter } from 'react-router-dom';
 
-export default function UsersTable(props) {
+function UsersTable(props) {
     const [users, setUsers] = useState([]);
     useEffect(() => {
         const loadUsers = async () => setUsers(await getAllUsers());
@@ -28,7 +29,10 @@ export default function UsersTable(props) {
 }
 
 const columns = [
+    { name: 'id', label: 'id' },
     { name: 'firstName', label: 'Name' },
     { name: 'lastName', label: 'Last Name' },
     { name: 'email', label: 'e-mail' },
 ];
+
+export default withRouter(UsersTable);
