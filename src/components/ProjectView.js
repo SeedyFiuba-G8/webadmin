@@ -1,8 +1,8 @@
 import { useEffect, useState, React } from 'react';
 import { getProject } from '../api/projectsQuery';
 import ProjectStyle from './ProjectStyle';
-import ProjectDetail from './ProjectDetail';
-import { CssBaseline, Grid, Container } from '@material-ui/core';
+import VisualDetail from './VisualDetail';
+import { CssBaseline, Grid, Container, Typography } from '@material-ui/core';
 
 import TemporaryImg from '../assets/temporary-img.jpg';
 
@@ -26,17 +26,44 @@ export default function ProjectView(props) {
             <CssBaseline />
             <Container maxWidth="lg">
                 <ProjectStyle post={projectStyle} />
+
+                <Typography variant="h3" gutterBottom>
+                    General Info
+                </Typography>
+
                 <Grid container spacing={2}>
-                    <ProjectDetail title="Objective" info={project.objective} />
-                    <ProjectDetail title="Country" info={project.country} />
-                    <ProjectDetail title="City" info={project.city} />
+                    <VisualDetail
+                        size={4}
+                        title="Objective"
+                        info={project.objective}
+                    />
                 </Grid>
+
+                <Typography variant="h3" gutterBottom>
+                    Location
+                </Typography>
+
                 <Grid container spacing={2}>
-                    <ProjectDetail
+                    <VisualDetail
+                        size={4}
+                        title="Country"
+                        info={project.country}
+                    />
+                    <VisualDetail size={4} title="City" info={project.city} />
+                </Grid>
+
+                <Typography variant="h3" gutterBottom>
+                    Timeline
+                </Typography>
+
+                <Grid container spacing={2}>
+                    <VisualDetail
+                        size={4}
                         title="Published on"
                         info={project.publishedOn}
                     />
-                    <ProjectDetail
+                    <VisualDetail
+                        size={4}
                         title="Finalized by"
                         info={project.finalizedBy}
                     />

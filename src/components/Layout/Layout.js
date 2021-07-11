@@ -5,6 +5,7 @@ import Users from '../../controllers/Users';
 import Sidebar from '../SideBar/Sidebar';
 import Error from '../../controllers/Error';
 import Project from '../../controllers/Project';
+import User from '../../controllers/User';
 
 function Layout(props) {
     var classes = getStyles();
@@ -17,20 +18,21 @@ function Layout(props) {
                     <Switch>
                         <Route
                             exact
-                            path='/app'
-                            render={() => <Redirect to='/app/projects' />}
+                            path="/app"
+                            render={() => <Redirect to="/app/projects" />}
                         />
                         <Route
                             exact
-                            path='/app/projects'
+                            path="/app/projects"
                             component={Projects}
                         />
                         <Route
                             exact
-                            path='/app/projects/:id'
+                            path="/app/projects/:id"
                             component={Project}
                         />
-                        <Route exact path='/app/users' component={Users} />
+                        <Route exact path="/app/users" component={Users} />
+                        <Route exact path="/app/users/:id" component={User} />
                         {/* Default */}
                         <Route component={Error} />
                     </Switch>
