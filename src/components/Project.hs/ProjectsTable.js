@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import MUIDataTable from 'mui-datatables';
-import { getAllProjects } from '../api/projectsQuery';
+import { getAllProjects } from '../../api/projectsQuery';
 import { withRouter } from 'react-router-dom';
 
 function ProjectsTable(props) {
@@ -17,7 +17,7 @@ function ProjectsTable(props) {
 
     return (
         <MUIDataTable
-            title='All Projects'
+            title="All Projects"
             data={projects}
             columns={columns}
             options={{

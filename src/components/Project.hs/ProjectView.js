@@ -1,10 +1,10 @@
 import { useEffect, useState, React } from 'react';
-import { getProject } from '../api/projectsQuery';
+import { getProject } from '../../api/projectsQuery';
 import ProjectStyle from './ProjectStyle';
-import VisualDetail from './VisualDetail';
+import VisualDetail from '../VisualDetail';
 import { CssBaseline, Grid, Container, Typography } from '@material-ui/core';
 
-import TemporaryImg from '../assets/temporary-img.jpg';
+import TemporaryImg from '../../assets/temporary-img.jpg';
 
 export default function ProjectView(props) {
     const [project, setProject] = useState([]);

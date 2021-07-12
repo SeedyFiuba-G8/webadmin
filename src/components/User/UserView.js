@@ -1,8 +1,7 @@
 import { useEffect, useState, React } from 'react';
-import { getUser } from '../api/usersQuery';
-import VisualDetail from './VisualDetail';
+import { getUser } from '../../api/usersQuery';
+import VisualDetail from '../VisualDetail';
 import { CssBaseline, Grid, Container, Typography } from '@material-ui/core';
-import { useParams } from 'react-router';
 
 export default function UserView(props) {
     const [user, setProject] = useState([]);

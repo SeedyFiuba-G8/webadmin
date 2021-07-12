@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MUIDataTable from 'mui-datatables';
-import { getAllUsers } from '../api/usersQuery';
+import { getAllUsers } from '../../api/usersQuery';
 import { withRouter } from 'react-router-dom';
 
 function UsersTable(props) {

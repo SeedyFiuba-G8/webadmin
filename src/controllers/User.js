@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { ArrowBack } from '@material-ui/icons';
 import { Link, useParams } from 'react-router-dom';
 import PageTitle from '../components/PageTitle';
-import UserView from '../components/UserView';
+import UserView from '../components/User/UserView';
 
 function User(props) {
     const classes = getStyles();
