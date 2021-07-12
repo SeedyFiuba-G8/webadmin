@@ -9,7 +9,7 @@ function Projects(props) {
 
     return (
         <>
-            <PageTitle title='Projects' />
+            <PageTitle title="Projects" />
             <Grid container className={classes.container}>
                 <Grid item xs={12}>
                     <ProjectsTable />

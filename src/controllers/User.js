@@ -4,19 +4,23 @@ import { withRouter } from 'react-router';
 import { ArrowBack } from '@material-ui/icons';
 import { Link, useParams } from 'react-router-dom';
 import PageTitle from '../components/PageTitle';
-import ProjectView from '../components/ProjectView';
+import UserView from '../components/UserView';
 
-function Project(props) {
+function User(props) {
     const classes = getStyles();
     const { id } = useParams();
     console.log(id);
     return (
         <>
-            <Button to={'/'} component={Link} startIcon={<ArrowBack />} />
-            <PageTitle title="Detail  of  project " />
+            <Button
+                to={'/app/users'}
+                component={Link}
+                startIcon={<ArrowBack />}
+            />
+            <PageTitle title="User Profile " />
             <Grid container className={classes.container}>
                 <Grid item xs={12}>
-                    <ProjectView id={id} />
+                    <UserView id={id} />
                 </Grid>
             </Grid>
         </>
@@ -36,4 +40,5 @@ const getStyles = makeStyles((theme) => ({
         left: 0,
     },
 }));
-export default withRouter(Project);
+
+export default withRouter(User);

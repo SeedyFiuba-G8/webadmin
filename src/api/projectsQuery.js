@@ -14,10 +14,13 @@ export async function getAllProjects({ rows, page }) {
     }
 }
 
-export function getProject(id) {
+export async function getProject(id) {
     try {
-        return apiProvider.get('project', { params: id });
+        const project = await apiProvider.get(`projects/${id}`);
+        return project;
     } catch (error) {
-        return {};
+        console.error(error);
+        console.log("Couldn't get project.");
+        return [];
     }
 }
