@@ -6,6 +6,7 @@ import Sidebar from '../SideBar/Sidebar';
 import Error from '../../controllers/Error';
 import Project from '../../controllers/Project';
 import User from '../../controllers/User';
+import Services from '../../controllers/Services';
 
 function Layout(props) {
     var classes = getStyles();
@@ -33,6 +34,11 @@ function Layout(props) {
                         />
                         <Route exact path="/app/users" component={Users} />
                         <Route exact path="/app/users/:id" component={User} />
+                        <Route
+                            exact
+                            path="/app/services"
+                            component={Services}
+                        />
                         {/* Default */}
                         <Route component={Error} />
                     </Switch>

@@ -5,6 +5,7 @@ import {
     WidgetsTwoTone as ProjectsIcon,
     RecentActors as UsersIcon,
     ExitToApp as LogoutIcon,
+    Extension as ServicesIcon,
 } from '@material-ui/icons';
 import { withRouter } from 'react-router-dom';
 import SidebarLink from './SidebarLink';
@@ -18,6 +19,12 @@ const structure = [
         icon: <ProjectsIcon />,
     },
     { key: 1, label: 'Users', link: '/app/users', icon: <UsersIcon /> },
+    {
+        key: 2,
+        label: 'Services',
+        link: '/app/services',
+        icon: <ServicesIcon />,
+    },
 ];
 
 function Sidebar({ location, history }) {
