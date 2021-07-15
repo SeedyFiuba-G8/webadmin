@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 
 const states = {
-    UP: 'primary',
+    UP: 'success',
     DOWN: 'secondary',
 };
 
