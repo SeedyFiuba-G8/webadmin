@@ -7,6 +7,8 @@ import Error from '../../controllers/Error';
 import Project from '../../controllers/Project';
 import User from '../../controllers/User';
 import Services from '../../controllers/Services';
+import UserMetrics from '../../controllers/UserMetrics';
+import ProjectMetrics from '../../controllers/ProjectMetrics';
 
 function Layout(props) {
     var classes = getStyles();
@@ -38,6 +40,16 @@ function Layout(props) {
                             exact
                             path="/app/services"
                             component={Services}
+                        />
+                        <Route
+                            exact
+                            path="/app/usermetrics"
+                            component={UserMetrics}
+                        />
+                        <Route
+                            exact
+                            path="/app/projectmetrics"
+                            component={ProjectMetrics}
                         />
                         {/* Default */}
                         <Route component={Error} />

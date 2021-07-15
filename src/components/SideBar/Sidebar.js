@@ -6,6 +6,8 @@ import {
     RecentActors as UsersIcon,
     ExitToApp as LogoutIcon,
     Extension as ServicesIcon,
+    Assessment as ProjectMetricsIcon,
+    People as UserMetricsIcon,
 } from '@material-ui/icons';
 import { withRouter } from 'react-router-dom';
 import SidebarLink from './SidebarLink';
@@ -24,6 +26,18 @@ const structure = [
         label: 'Services',
         link: '/app/services',
         icon: <ServicesIcon />,
+    },
+    {
+        key: 3,
+        label: 'UserMetrics',
+        link: '/app/usermetrics',
+        icon: <UserMetricsIcon />,
+    },
+    {
+        key: 4,
+        label: 'ProjectMetrics',
+        link: '/app/projectmetrics',
+        icon: <ProjectMetricsIcon />,
     },
 ];
 
