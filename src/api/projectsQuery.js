@@ -1,8 +1,8 @@
 import apiProvider from './utilities/provider';
 
-export async function getAllProjects() {
+export async function getAllProjects(config) {
     try {
-        const project = await apiProvider.get('projects');
+        const project = await apiProvider.get('projects', config);
         return project.projects;
     } catch (error) {
         console.error(error);

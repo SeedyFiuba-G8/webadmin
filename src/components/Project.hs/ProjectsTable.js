@@ -1,33 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import MUIDataTable from 'mui-datatables';
-import { getAllProjects } from '../../api/projectsQuery';
+import React from 'react';
+import { getAllProjects } from '../api/projectsQuery';
 import { withRouter } from 'react-router-dom';
+import Table from './Table';
 
 function ProjectsTable(props) {
-    const [projects, setProjects] = useState([]);
-    useEffect(() => {
-        const loadProjects = async () => setProjects(await getAllProjects());
-        loadProjects();
-    }, []);
-
-    function onRowClickAction(rowData) {
-        const id = rowData[0];
-        props.history.push('projects/' + id);
-    }
-
-    return (
-        <MUIDataTable
-            title="All Projects"
-            data={projects}
-            columns={columns}
-            options={{
-                filterType: 'checkbox',
-                onRowClick: onRowClickAction,
-                // onChangePage:
-                // onChangeRowsPerPage:
-            }}
-        />
-    );
+    return Table(props, columns, getAllProjects);
 }
 
 const columns = [
