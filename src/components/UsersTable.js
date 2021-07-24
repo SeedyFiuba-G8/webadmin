@@ -17,7 +17,7 @@ function UsersTable(props) {
 
     return (
         <MUIDataTable
-            title="All Users"
+            title='All Users'
             data={users}
             columns={columns}
             options={{

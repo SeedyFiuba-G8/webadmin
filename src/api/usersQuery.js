@@ -1,8 +1,8 @@
 import apiProvider from './utilities/provider';
 
-export async function getAllUsers() {
+export async function getAllUsers(config) {
     try {
-        const response = await apiProvider.get('users');
+        const response = await apiProvider.get('users', config);
         return response.users;
     } catch (error) {
         console.error(error);
