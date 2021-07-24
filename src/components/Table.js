@@ -5,7 +5,7 @@ function Table(props, columns, get) {
     const [config, setConfig] = useState({ limit: 3, offset: 0 });
     const [projects, setData] = useState([get, config]);
     useEffect(() => {
-        const loadData = async () => setData(await get(config));
+        const loadData = () => setData(get(config));
         console.log('Reloading with config: ', config);
         loadData();
     }, [get, config]);

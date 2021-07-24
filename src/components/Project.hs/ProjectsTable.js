@@ -1,7 +1,7 @@
 import React from 'react';
-import { getAllProjects } from '../api/projectsQuery';
+import { getAllProjects } from '../../api/projectsQuery';
 import { withRouter } from 'react-router-dom';
-import Table from './Table';
+import Table from '../Table';
 
 function ProjectsTable(props) {
     return Table(props, columns, getAllProjects);
