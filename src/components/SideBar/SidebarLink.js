@@ -49,12 +49,10 @@ const getStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.light,
     },
     linkIcon: {
-        marginRight: theme.spacing(1),
         color: theme.palette.text.secondary + '99',
         transition: theme.transitions.create('color'),
         width: 24,
         display: 'flex',
-        justifyContent: 'center',
     },
     linkIconActive: {
         color: theme.palette.primary.main,
