@@ -3,8 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Table from '../Table';
 
 function ProjectsTable(props) {
-    var title = 'All Projects';
-    return Table(props, columns, getAllProjects, title);
+    return Table(props, columns, getAllProjects);
 }
 
 const columns = [

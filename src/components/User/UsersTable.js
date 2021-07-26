@@ -66,11 +66,11 @@ function UsersTable(props) {
 
     return (
         <MUIDataTable
-            title="All Users"
+            // title="All Users"
             data={users}
             columns={columns}
             options={{
-                filterType: 'checkbox',
+                selectableRows: false,
                 onRowClick: onRowClickAction,
                 resizableColumns: true,
                 page: config.offset * config.limit,
@@ -112,7 +112,7 @@ const columns = [
         options: {
             filter: true,
             customFilterListOptions: {
-                render: (v) => `Type: ${v}`,
+                render: (v) => `First Name: ${v}`,
             },
             filterType: 'textField',
         },
@@ -123,7 +123,7 @@ const columns = [
         options: {
             filter: true,
             customFilterListOptions: {
-                render: (v) => `Type: ${v}`,
+                render: (v) => `Last Name: ${v}`,
             },
             filterType: 'textField',
         },

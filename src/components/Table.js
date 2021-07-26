@@ -65,11 +65,10 @@ function Table(props, columns, get, title) {
 
     return (
         <MUIDataTable
-            title={title}
             data={projects}
             columns={columns}
             options={{
-                filterType: 'checkbox',
+                selectableRows: false,
                 onRowClick: onRowClickAction,
                 resizableColumns: true,
                 page: config.offset * config.limit,
