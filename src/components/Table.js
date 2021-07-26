@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import MUIDataTable from 'mui-datatables';
+import _ from 'lodash';
 
-function Table(props, columns, get) {
-    const [config, setConfig] = useState({ limit: 3, offset: 0 });
+function Table(props, columns, get, title) {
+    const [config, setConfig] = useState({
+        limit: 3,
+        offset: 0,
+    });
     const [projects, setData] = useState([get, config]);
     useEffect(() => {
-        const loadData = () => setData(get(config));
+        const loadData = async () => setData(await get(config));
         console.log('Reloading with config: ', config);
         loadData();
     }, [get, config]);
@@ -24,6 +28,7 @@ function Table(props, columns, get) {
     }
 
     function changeRowsPerPage(rows) {
+        console.log('changed page number');
         updateConfig({ limit: rows });
     }
 
@@ -35,9 +40,32 @@ function Table(props, columns, get) {
         // });
     }
 
+    function removeField(field) {
+        var config_aux = { ...config };
+        _.unset(config_aux, field);
+        setConfig(config_aux);
+    }
+
+    function changeFilters(columnChanged, filterList, changedColumnIndex) {
+        console.log('cambiando config:', filterList);
+        if (changedColumnIndex == null) {
+            setConfig({
+                limit: 3,
+                offset: 0,
+            });
+        } else if (filterList[changedColumnIndex].length === 0) {
+            console.log('Removed field:', columnChanged);
+            removeField(columnChanged);
+        } else {
+            var update = {};
+            update[columnChanged] = filterList[changedColumnIndex][0];
+            updateConfig(update);
+        }
+    }
+
     return (
         <MUIDataTable
-            title='All Projects'
+            title={title}
             data={projects}
             columns={columns}
             options={{
@@ -52,6 +80,18 @@ function Table(props, columns, get) {
                 onChangePage: changePage,
                 onChangeRowsPerPage: changeRowsPerPage,
                 onColumnSortChange: sortByColumn,
+                onFilterChange: (
+                    columnChanged,
+                    filterList,
+                    type,
+                    changedColumnIndex
+                ) => {
+                    changeFilters(
+                        columnChanged,
+                        filterList,
+                        changedColumnIndex
+                    );
+                },
             }}
         />
     );
