@@ -189,10 +189,6 @@ const getStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    forgetButton: {
-        textTransform: 'none',
-        fontWeight: 400,
-    },
 }));
 
 export default withRouter(Login);
