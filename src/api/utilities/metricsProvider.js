@@ -3,6 +3,19 @@ import { handleError, handleResponse } from './response';
 
 axios.defaults.baseURL = 'https://sf-tdp2-gateway-dev.herokuapp.com';
 
+const metricsSerializer = ({ initialDate, finalDate, userId }) => {
+    const initialDateQuery = `initialDate=${encodeURIComponent(
+        initialDate.toJSON()
+    )}`;
+    const finalDateQuery =
+        finalDate !== undefined
+            ? `&finalDate=${encodeURIComponent(finalDate.toJSON())}`
+            : '';
+    const userIdQuery = userId !== undefined ? `&userId=${userId}` : '';
+
+    return initialDateQuery + finalDateQuery + userIdQuery;
+};
+
 const updateAuthToken = async () => {
     var token = localStorage.getItem('token');
     console.log(`Setting auth token: ${token}`);
@@ -10,42 +23,23 @@ const updateAuthToken = async () => {
     else axios.defaults.headers['Authorization'] = undefined;
 };
 
-const post = async (resource, payload) => {
-    console.log(`Posting to: ${resource}`);
-    try {
-        const response = await axios.post(resource, payload);
-        return await handleResponse(response);
-    } catch (response) {
-        return await handleError(response);
-    }
-};
-
 const get = async (resource, params) => {
     console.log(`Getting: ${resource}`);
     await updateAuthToken();
     try {
-        const response = await axios.get(resource, { params: params });
+        const response = await axios.get(resource, {
+            paramsSerializer: metricsSerializer,
+            params: params,
+        });
         return await handleResponse(response);
     } catch (response) {
         return await handleError(response);
     }
 };
 
-const del = async (resource) => {
-    console.log(`deleting : ${resource}`);
-    try {
-        const response = await axios.delete(resource);
-        return await handleResponse(response);
-    } catch (response) {
-        return await handleError(response);
-    }
-};
-
-const apiProvider = {
-    post,
+const metricsApiProvider = {
     get,
-    del,
     updateAuthToken,
 };
 
-export default apiProvider;
+export default metricsApiProvider;

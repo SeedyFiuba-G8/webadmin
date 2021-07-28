@@ -1,20 +1,22 @@
 import React from 'react';
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles, Paper } from '@material-ui/core';
 import { withRouter } from 'react-router';
-import UsersTable from '../components/User/UsersTable';
 import PageTitle from '../components/PageTitle';
+import ServiceTable from '../components/Service.hs/ServicesTable';
 
-function Projects(props) {
+function Services(props) {
     const classes = getStyles();
 
     return (
         <>
-            <PageTitle title="Users" />
-            <Grid container className={classes.container}>
-                <Grid item xs={12}>
-                    <UsersTable />
+            <PageTitle title="Services" />
+            <Paper>
+                <Grid container className={classes.container}>
+                    <Grid item xs={12}>
+                        <ServiceTable />
+                    </Grid>
                 </Grid>
-            </Grid>
+            </Paper>
         </>
     );
 }
@@ -33,4 +35,4 @@ const getStyles = makeStyles((theme) => ({
     },
 }));
 
-export default withRouter(Projects);
+export default withRouter(Services);

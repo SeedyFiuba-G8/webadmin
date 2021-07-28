@@ -7,23 +7,20 @@ export default function PageTitle(props) {
 
     return (
         <div className={classes.pageTitleContainer}>
-            <Typography className={classes.typo} variant='h1' size='sm'>
+            <Typography className={classes.typo} variant="h1" size="sm">
                 {props.title}
             </Typography>
         </div>
     );
 }
 
-function getTitleStyles(theme) {
-    return makeStyles((theme) => ({
-        pageTitleContainer: {
-            display: 'flex',
-            alignSelf: 'left',
-            marginBottom: theme.spacing(4),
-            marginTop: theme.spacing(5),
-        },
-        typo: {
-            color: theme.palette.text.hint,
-        },
-    }));
-}
+const getTitleStyles = makeStyles((theme) => ({
+    pageTitleContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginBottom: theme.spacing(4),
+    },
+    typo: {
+        color: theme.palette.text.hint,
+    },
+}));
