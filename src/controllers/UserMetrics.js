@@ -161,7 +161,7 @@ function UserMetrics(props) {
                                     colorBrightness="secondary"
                                     noWrap
                                 >
-                                    Tota
+                                    Total
                                 </Typography>
                                 <Typography size="md">
                                     {metrics.users?.total || 0}
