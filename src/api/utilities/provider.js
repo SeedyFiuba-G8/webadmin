@@ -31,9 +31,20 @@ const get = async (resource, params) => {
     }
 };
 
+const del = async (resource) => {
+    console.log(`deleting : ${resource}`);
+    try {
+        const response = await axios.delete(resource);
+        return await handleResponse(response);
+    } catch (response) {
+        return await handleError(response);
+    }
+};
+
 const apiProvider = {
     post,
     get,
+    del,
     updateAuthToken,
 };
 

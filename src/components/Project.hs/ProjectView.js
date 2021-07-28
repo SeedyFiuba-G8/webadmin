@@ -2,17 +2,16 @@ import { useEffect, useState, React } from 'react';
 import { getProject } from '../../api/projectsQuery';
 import ProjectStyle from './ProjectStyle';
 import VisualDetail from '../VisualDetail';
+import VisualBlockedButton from '../VisualProjectBlockedButton';
 import { CssBaseline, Grid, Container, Typography } from '@material-ui/core';
-
 import TemporaryImg from '../../assets/temporary-img.jpg';
 
 export default function ProjectView(props) {
-    const [project, setProject] = useState([]);
+    const [project, setProject] = useState({});
     useEffect(() => {
         const loadProjects = async () => setProject(await getProject(props.id));
         loadProjects();
     }, [props.id]);
-    // console.log(project.id);
 
     const projectStyle = {
         title: project.title,
@@ -26,7 +25,17 @@ export default function ProjectView(props) {
             <CssBaseline />
             <Container maxWidth="lg">
                 <ProjectStyle post={projectStyle} />
-
+                <Typography variant="h3" gutterBottom>
+                    Project Status
+                </Typography>
+                <Grid container spacing={2}>
+                    <VisualBlockedButton
+                        size={4}
+                        title="Block"
+                        blocked={project.blocked}
+                        id={project.id}
+                    />
+                </Grid>
                 <Typography variant="h3" gutterBottom>
                     General Info
                 </Typography>
