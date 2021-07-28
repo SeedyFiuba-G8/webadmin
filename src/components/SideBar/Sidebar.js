@@ -12,6 +12,7 @@ import {
 import { withRouter } from 'react-router-dom';
 import SidebarLink from './SidebarLink';
 import { signOut, useUserDispatch } from '../../context/UserContext';
+import InviteAdminButton from './InviteAdminButton';
 
 const structure = [
     {
@@ -59,6 +60,7 @@ function Sidebar({ location, history }) {
                     <SidebarLink key={link.key} location={location} {...link} />
                 ))}
             </List>
+            <InviteAdminButton />
             <Button
                 variant="contained"
                 color="secondary"
@@ -66,7 +68,7 @@ function Sidebar({ location, history }) {
                 startIcon={<LogoutIcon />}
                 // position to define
                 style={{
-                    alignSelf: 'flex-end',
+                    alignSelf: 'flex-start',
                     position: 'absolute',
                     bottom: 20,
                 }}
