@@ -21,3 +21,24 @@ export async function getProject(id) {
         return [];
     }
 }
+
+export async function blockProject(id) {
+    try {
+        const response = await apiProvider.post(`projects/${id}/block`);
+        return response;
+    } catch (error) {
+        console.error(error);
+        console.log("Couldn't block project.");
+        return [];
+    }
+}
+export async function unBlockProject(id) {
+    try {
+        const response = await apiProvider.del(`projects/${id}/block`);
+        return response;
+    } catch (error) {
+        console.error(error);
+        console.log("Couldn't unblock project.");
+        return [];
+    }
+}

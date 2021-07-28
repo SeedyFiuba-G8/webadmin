@@ -21,3 +21,24 @@ export async function getUser(id) {
         return [];
     }
 }
+
+export async function banUser(id) {
+    try {
+        const response = await apiProvider.post(`users/${id}/ban`);
+        return response;
+    } catch (error) {
+        console.error(error);
+        console.log("Couldn't ban user.");
+        return [];
+    }
+}
+export async function unbanUser(id) {
+    try {
+        const response = await apiProvider.del(`users/${id}/ban`);
+        return response;
+    } catch (error) {
+        console.error(error);
+        console.log("Couldn't unban user.");
+        return [];
+    }
+}
