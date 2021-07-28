@@ -1,20 +1,32 @@
 import { useEffect, useState, React } from 'react';
 import { getUser } from '../../api/usersQuery';
 import VisualDetail from '../VisualDetail';
+import VisualBlockedButton from '../VisualUserBlockedButton';
 import { CssBaseline, Grid, Container, Typography } from '@material-ui/core';
 
 export default function UserView(props) {
-    const [user, setProject] = useState([]);
+    const [user, setUser] = useState({});
     useEffect(() => {
-        const loadUser = async () => setProject(await getUser(props.id));
+        const loadUser = async () => setUser(await getUser(props.id));
         loadUser();
     }, [props.id]);
-    // console.log(user.id);
 
     return (
         <>
             <CssBaseline />
             <Container maxWidth="lg">
+                <Typography variant="h3" gutterBottom>
+                    User Status
+                </Typography>
+
+                <Grid container spacing={2}>
+                    <VisualBlockedButton
+                        size={4}
+                        title="Ban"
+                        blocked={user.banned}
+                        id={props.id}
+                    />
+                </Grid>
                 <Typography variant="h3" gutterBottom>
                     General Info
                 </Typography>
@@ -55,17 +67,17 @@ export default function UserView(props) {
                     <VisualDetail size={4} title="City" info={user.city} />
                 </Grid>
 
-                <Typography variant="h3" gutterBottom>
+                {/* <Typography variant="h3" gutterBottom>
                     Status
-                </Typography>
-
+                </Typography> */}
+                {/* 
                 <Grid container spacing={2}>
                     <VisualDetail
                         size={4}
                         title="Banned"
                         info={user.banned ? 'true' : 'false'}
                     />
-                </Grid>
+                </Grid> */}
             </Container>
         </>
     );
