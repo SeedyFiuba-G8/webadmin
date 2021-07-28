@@ -70,7 +70,7 @@ function UsersTable(props) {
             data={users}
             columns={columns}
             options={{
-                selectableRows: false,
+                selectableRows: 'none',
                 onRowClick: onRowClickAction,
                 resizableColumns: true,
                 page: config.offset * config.limit,

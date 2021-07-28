@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MUIDataTable from 'mui-datatables';
 import _ from 'lodash';
 
-function Table(props, columns, get, title) {
+function Table(props, columns, get) {
     const [config, setConfig] = useState({
         limit: 3,
         offset: 0,
@@ -68,7 +68,7 @@ function Table(props, columns, get, title) {
             data={projects}
             columns={columns}
             options={{
-                selectableRows: false,
+                selectableRows: 'none',
                 onRowClick: onRowClickAction,
                 resizableColumns: true,
                 page: config.offset * config.limit,

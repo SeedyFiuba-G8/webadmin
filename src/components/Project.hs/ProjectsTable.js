@@ -55,10 +55,28 @@ const columns = [
                 render: (v) => `Status: ${v}`,
             },
             filterOptions: {
-                names: ['DRAFT', 'FUNDING', 'FINALIZED'],
+                names: ['DRAFT', 'FUNDING', 'IN_PROGRESS', 'COMPLETED'],
             },
 
             filterType: 'dropdown',
+        },
+    },
+    {
+        name: 'blocked',
+        label: 'Blocked',
+        options: {
+            filter: true,
+            customFilterListOptions: {
+                render: (v) => `Blocked: ${v}`,
+            },
+            filterOptions: {
+                names: ['true', 'false'],
+            },
+
+            filterType: 'dropdown',
+            customBodyRender: (val) => {
+                return val === true ? 'true' : 'false';
+            },
         },
     },
 ];
