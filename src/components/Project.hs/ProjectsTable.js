@@ -10,7 +10,7 @@ function ProjectsTable(props) {
         limit: 3,
         offset: 0,
     });
-    const [projects, setProjects] = useState([getAllProjects, config]);
+    const [projects, setProjects] = useState([]);
 
     useEffect(() => {
         const loadData = async () => {
