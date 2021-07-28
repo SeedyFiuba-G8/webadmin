@@ -56,7 +56,7 @@ function getFontSize(size, variant = '', theme) {
 
     switch (size) {
         case 'sm':
-            multiplier = 0.8;
+            multiplier = 1;
             break;
         case 'md':
             multiplier = 1.5;
