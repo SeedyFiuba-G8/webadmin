@@ -12,7 +12,7 @@ import {
     dateRange,
     defaultData,
 } from '../api/utilities/getEventMetric';
-import { ArrowForward as ArrowForwardIcon } from '@material-ui/icons';
+import ProfitSection from '../components/ProfitSection';
 
 function UserMetrics(props) {
     const [metrics, setMetrics] = useState([]);
@@ -101,7 +101,7 @@ function UserMetrics(props) {
         <>
             <PageTitle title="User Metrics" />
             <Grid container spacing={2}>
-                <Grid item xs={8}>
+                <Grid item xs={12}>
                     <Widget
                         header={
                             <div className={classes.title}>
@@ -161,8 +161,7 @@ function UserMetrics(props) {
                                     colorBrightness="secondary"
                                     noWrap
                                 >
-                                    Totalimport BigStat from
-                                    '../components/Metrics/BigStat';
+                                    Tota
                                 </Typography>
                                 <Typography size="md">
                                     {metrics.users?.total || 0}
@@ -186,7 +185,7 @@ function UserMetrics(props) {
             </Grid>
             <div>
                 <Grid container spacing={2}>
-                    <Grid item xs={8}>
+                    <Grid item xs={12}>
                         <Widget
                             header={
                                 <div className={classes.title}>
@@ -248,13 +247,16 @@ function UserMetrics(props) {
                                                     .difference
                                             }
                                         </Typography>
-                                        <ArrowForwardIcon
-                                            className={classnames(
+                                        <ProfitSection
+                                            value={
+                                                metricsEvent.admins.register
+                                                    .difference
+                                            }
+                                            classes={classes}
+                                            increase={
                                                 metricsEvent.admins.register
                                                     .profit
-                                                    ? classes.profitArrow
-                                                    : classes.profitArrowDanger
-                                            )}
+                                            }
                                         />
                                         <Typography variant="h6">)</Typography>
                                     </Grid>
@@ -277,12 +279,15 @@ function UserMetrics(props) {
                                                     .difference
                                             }
                                         </Typography>
-                                        <ArrowForwardIcon
-                                            className={classnames(
+                                        <ProfitSection
+                                            value={
+                                                metricsEvent.admins.login
+                                                    .difference
+                                            }
+                                            classes={classes}
+                                            increase={
                                                 metricsEvent.admins.login.profit
-                                                    ? classes.profitArrow
-                                                    : classes.profitArrowDanger
-                                            )}
+                                            }
                                         />
                                         <Typography variant="h6">)</Typography>
                                     </Grid>
@@ -302,12 +307,15 @@ function UserMetrics(props) {
                                         <Typography variant="h6">
                                             {metricsEvent.admins.ban.difference}
                                         </Typography>
-                                        <ArrowForwardIcon
-                                            className={classnames(
+                                        <ProfitSection
+                                            value={
+                                                metricsEvent.admins.ban
+                                                    .difference
+                                            }
+                                            classes={classes}
+                                            increase={
                                                 metricsEvent.admins.ban.profit
-                                                    ? classes.profitArrow
-                                                    : classes.profitArrowDanger
-                                            )}
+                                            }
                                         />
                                         <Typography variant="h6">)</Typography>
                                     </Grid>
@@ -330,12 +338,15 @@ function UserMetrics(props) {
                                                     .difference
                                             }
                                         </Typography>
-                                        <ArrowForwardIcon
-                                            className={classnames(
+                                        <ProfitSection
+                                            value={
+                                                metricsEvent.admins.unban
+                                                    .difference
+                                            }
+                                            classes={classes}
+                                            increase={
                                                 metricsEvent.admins.unban.profit
-                                                    ? classes.profitArrow
-                                                    : classes.profitArrowDanger
-                                            )}
+                                            }
                                         />
                                         <Typography variant="h6">)</Typography>
                                     </Grid>
@@ -399,13 +410,16 @@ function UserMetrics(props) {
                                                     .native.difference
                                             }
                                         </Typography>
-                                        <ArrowForwardIcon
-                                            className={classnames(
+                                        <ProfitSection
+                                            value={
+                                                metricsEvent.users.register
+                                                    .native.difference
+                                            }
+                                            classes={classes}
+                                            increase={
                                                 metricsEvent.users.register
                                                     .native.profit
-                                                    ? classes.profitArrow
-                                                    : classes.profitArrowDanger
-                                            )}
+                                            }
                                         />
                                         <Typography variant="h6">)</Typography>
                                     </Grid>
@@ -432,13 +446,16 @@ function UserMetrics(props) {
                                                     .federate.difference
                                             }
                                         </Typography>
-                                        <ArrowForwardIcon
-                                            className={classnames(
+                                        <ProfitSection
+                                            value={
+                                                metricsEvent.users.register
+                                                    .federate.difference
+                                            }
+                                            classes={classes}
+                                            increase={
                                                 metricsEvent.users.register
                                                     .federate.profit
-                                                    ? classes.profitArrow
-                                                    : classes.profitArrowDanger
-                                            )}
+                                            }
                                         />
                                         <Typography variant="h6">)</Typography>
                                     </Grid>
@@ -465,13 +482,16 @@ function UserMetrics(props) {
                                                     .difference
                                             }
                                         </Typography>
-                                        <ArrowForwardIcon
-                                            className={classnames(
+                                        <ProfitSection
+                                            value={
+                                                metricsEvent.users.login.native
+                                                    .difference
+                                            }
+                                            classes={classes}
+                                            increase={
                                                 metricsEvent.users.login.native
                                                     .profit
-                                                    ? classes.profitArrow
-                                                    : classes.profitArrowDanger
-                                            )}
+                                            }
                                         />
                                         <Typography variant="h6">)</Typography>
                                     </Grid>
@@ -498,13 +518,16 @@ function UserMetrics(props) {
                                                     .federate.difference
                                             }
                                         </Typography>
-                                        <ArrowForwardIcon
-                                            className={classnames(
+                                        <ProfitSection
+                                            value={
+                                                metricsEvent.users.login
+                                                    .federate.difference
+                                            }
+                                            classes={classes}
+                                            increase={
                                                 metricsEvent.users.login
                                                     .federate.profit
-                                                    ? classes.profitArrow
-                                                    : classes.profitArrowDanger
-                                            )}
+                                            }
                                         />
                                         <Typography variant="h6">)</Typography>
                                     </Grid>
@@ -534,13 +557,16 @@ function UserMetrics(props) {
                                                     .passwordRecovery.difference
                                             }
                                         </Typography>
-                                        <ArrowForwardIcon
-                                            className={classnames(
+                                        <ProfitSection
+                                            value={
+                                                metricsEvent.users
+                                                    .passwordRecovery.difference
+                                            }
+                                            classes={classes}
+                                            increase={
                                                 metricsEvent.users
                                                     .passwordRecovery.profit
-                                                    ? classes.profitArrow
-                                                    : classes.profitArrowDanger
-                                            )}
+                                            }
                                         />
                                         <Typography variant="h6">)</Typography>
                                     </Grid>
