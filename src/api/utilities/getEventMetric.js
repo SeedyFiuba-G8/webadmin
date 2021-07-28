@@ -49,8 +49,8 @@ async function getEventsUsersMetricData(dateVariation) {
                 finalDate: today,
             };
 
-            const metricsToday = getEventsUsersMetric(configToday);
-            const metricsLastDay = getEventsUsersMetric(configLastDay);
+            const metricsToday = await getEventsUsersMetric(configToday);
+            const metricsLastDay = await getEventsUsersMetric(configLastDay);
 
             return {
                 admins: {
@@ -100,62 +100,62 @@ async function getEventsUsersMetricData(dateVariation) {
                 users: {
                     register: {
                         native: {
-                            value: metricsToday.user.register.native,
+                            value: metricsToday.users.register.native,
                             profit:
-                                metricsToday.user.register.native >
-                                metricsLastDay.user.register.native
+                                metricsToday.users.register.native >
+                                metricsLastDay.users.register.native
                                     ? true
                                     : false,
                             difference:
-                                metricsToday.user.register.native -
-                                metricsLastDay.user.register.native,
+                                metricsToday.users.register.native -
+                                metricsLastDay.users.register.native,
                         },
                         federate: {
-                            value: metricsToday.user.register.federate,
+                            value: metricsToday.users.register.federate,
                             profit:
-                                metricsToday.user.register.federate >
-                                metricsLastDay.user.register.federate
+                                metricsToday.users.register.federate >
+                                metricsLastDay.users.register.federate
                                     ? true
                                     : false,
                             difference:
-                                metricsToday.user.register.federate -
-                                metricsLastDay.user.register.federate,
+                                metricsToday.users.register.federate -
+                                metricsLastDay.users.register.federate,
                         },
                     },
                     login: {
                         native: {
-                            value: metricsToday.user.login.native,
+                            value: metricsToday.users.login.native,
                             profit:
-                                metricsToday.user.login.native >
-                                metricsLastDay.user.login.native
+                                metricsToday.users.login.native >
+                                metricsLastDay.users.login.native
                                     ? true
                                     : false,
                             difference:
-                                metricsToday.user.login.native -
-                                metricsLastDay.user.login.native,
+                                metricsToday.users.login.native -
+                                metricsLastDay.users.login.native,
                         },
                         federate: {
-                            value: metricsToday.user.login.federate,
+                            value: metricsToday.users.login.federate,
                             profit:
-                                metricsToday.user.login.federate >
-                                metricsLastDay.user.login.federate
+                                metricsToday.users.login.federate >
+                                metricsLastDay.users.login.federate
                                     ? true
                                     : false,
                             difference:
-                                metricsToday.user.login.federate -
-                                metricsLastDay.user.login.federate,
+                                metricsToday.users.login.federate -
+                                metricsLastDay.users.login.federate,
                         },
                     },
                     passwordRecovery: {
-                        value: metricsToday.user.passwordRecovery,
+                        value: metricsToday.users.passwordRecovery,
                         profit:
-                            metricsToday.user.passwordRecovery >
-                            metricsLastDay.user.passwordRecovery
+                            metricsToday.users.passwordRecovery >
+                            metricsLastDay.users.passwordRecovery
                                 ? true
                                 : false,
                         difference:
-                            metricsToday.user.passwordRecovery -
-                            metricsLastDay.user.passwordRecovery,
+                            metricsToday.users.passwordRecovery -
+                            metricsLastDay.users.passwordRecovery,
                     },
                 },
             };
@@ -173,15 +173,15 @@ async function getEventsUsersMetricData(dateVariation) {
 
             const configThisWeek = {
                 initialDate: thisWeek,
-                finalDate: today,
+                finalDate: actualDate,
             };
             const configLastWeek = {
                 initialDate: lastWeek,
                 finalDate: thisWeek,
             };
 
-            const metricsThisWeek = getEventsUsersMetric(configThisWeek);
-            const metricsLastWeek = getEventsUsersMetric(configLastWeek);
+            const metricsThisWeek = await getEventsUsersMetric(configThisWeek);
+            const metricsLastWeek = await getEventsUsersMetric(configLastWeek);
 
             return {
                 admins: {
@@ -233,62 +233,62 @@ async function getEventsUsersMetricData(dateVariation) {
                 users: {
                     register: {
                         native: {
-                            value: metricsThisWeek.user.register.native,
+                            value: metricsThisWeek.users.register.native,
                             profit:
-                                metricsThisWeek.user.register.native >
-                                metricsLastWeek.user.register.native
+                                metricsThisWeek.users.register.native >
+                                metricsLastWeek.users.register.native
                                     ? true
                                     : false,
                             difference:
-                                metricsThisWeek.user.register.native -
-                                metricsLastWeek.user.register.native,
+                                metricsThisWeek.users.register.native -
+                                metricsLastWeek.users.register.native,
                         },
                         federate: {
-                            value: metricsThisWeek.user.register.federate,
+                            value: metricsThisWeek.users.register.federate,
                             profit:
-                                metricsThisWeek.user.register.federate >
-                                metricsLastWeek.user.register.federate
+                                metricsThisWeek.users.register.federate >
+                                metricsLastWeek.users.register.federate
                                     ? true
                                     : false,
                             difference:
-                                metricsThisWeek.user.register.federate -
-                                metricsLastWeek.user.register.federate,
+                                metricsThisWeek.users.register.federate -
+                                metricsLastWeek.users.register.federate,
                         },
                     },
                     login: {
                         native: {
-                            value: metricsThisWeek.user.login.native,
+                            value: metricsThisWeek.users.login.native,
                             profit:
-                                metricsThisWeek.user.login.native >
-                                metricsLastWeek.user.login.native
+                                metricsThisWeek.users.login.native >
+                                metricsLastWeek.users.login.native
                                     ? true
                                     : false,
                             difference:
-                                metricsThisWeek.user.login.native -
-                                metricsLastWeek.user.login.native,
+                                metricsThisWeek.users.login.native -
+                                metricsLastWeek.users.login.native,
                         },
                         federate: {
-                            value: metricsThisWeek.user.login.federate,
+                            value: metricsThisWeek.users.login.federate,
                             profit:
-                                metricsThisWeek.user.login.federate >
-                                metricsLastWeek.user.login.federate
+                                metricsThisWeek.users.login.federate >
+                                metricsLastWeek.users.login.federate
                                     ? true
                                     : false,
                             difference:
-                                metricsThisWeek.user.login.federate -
-                                metricsLastWeek.user.login.federate,
+                                metricsThisWeek.users.login.federate -
+                                metricsLastWeek.users.login.federate,
                         },
                     },
                     passwordRecovery: {
-                        value: metricsThisWeek.user.passwordRecovery,
+                        value: metricsThisWeek.users.passwordRecovery,
                         profit:
-                            metricsThisWeek.user.passwordRecovery >
-                            metricsLastWeek.user.passwordRecovery
+                            metricsThisWeek.users.passwordRecovery >
+                            metricsLastWeek.users.passwordRecovery
                                 ? true
                                 : false,
                         difference:
-                            metricsThisWeek.user.passwordRecovery -
-                            metricsLastWeek.user.passwordRecovery,
+                            metricsThisWeek.users.passwordRecovery -
+                            metricsLastWeek.users.passwordRecovery,
                     },
                 },
             };
@@ -306,15 +306,19 @@ async function getEventsUsersMetricData(dateVariation) {
 
             const configThisMonth = {
                 initialDate: thisMonth,
-                finalDate: today,
+                finalDate: actualDate,
             };
             const configLastMonth = {
                 initialDate: lastMonth,
                 finalDate: thisMonth,
             };
 
-            const metricsThisMonth = getEventsUsersMetric(configThisMonth);
-            const metricsLastMonth = getEventsUsersMetric(configLastMonth);
+            const metricsThisMonth = await getEventsUsersMetric(
+                configThisMonth
+            );
+            const metricsLastMonth = await getEventsUsersMetric(
+                configLastMonth
+            );
 
             return {
                 admins: {
@@ -366,62 +370,62 @@ async function getEventsUsersMetricData(dateVariation) {
                 users: {
                     register: {
                         native: {
-                            value: metricsThisMonth.user.register.native,
+                            value: metricsThisMonth.users.register.native,
                             profit:
-                                metricsThisMonth.user.register.native >
-                                metricsLastMonth.user.register.native
+                                metricsThisMonth.users.register.native >
+                                metricsLastMonth.users.register.native
                                     ? true
                                     : false,
                             difference:
-                                metricsThisMonth.user.register.native -
-                                metricsLastMonth.user.register.native,
+                                metricsThisMonth.users.register.native -
+                                metricsLastMonth.users.register.native,
                         },
                         federate: {
-                            value: metricsThisMonth.user.register.federate,
+                            value: metricsThisMonth.users.register.federate,
                             profit:
-                                metricsThisMonth.user.register.federate >
-                                metricsLastMonth.user.register.federate
+                                metricsThisMonth.users.register.federate >
+                                metricsLastMonth.users.register.federate
                                     ? true
                                     : false,
                             difference:
-                                metricsThisMonth.user.register.federate -
-                                metricsLastMonth.user.register.federate,
+                                metricsThisMonth.users.register.federate -
+                                metricsLastMonth.users.register.federate,
                         },
                     },
                     login: {
                         native: {
-                            value: metricsThisMonth.user.login.native,
+                            value: metricsThisMonth.users.login.native,
                             profit:
-                                metricsThisMonth.user.login.native >
-                                metricsLastMonth.user.login.native
+                                metricsThisMonth.users.login.native >
+                                metricsLastMonth.users.login.native
                                     ? true
                                     : false,
                             difference:
-                                metricsThisMonth.user.login.native -
-                                metricsLastMonth.user.login.native,
+                                metricsThisMonth.users.login.native -
+                                metricsLastMonth.users.login.native,
                         },
                         federate: {
-                            value: metricsThisMonth.user.login.federate,
+                            value: metricsThisMonth.users.login.federate,
                             profit:
-                                metricsThisMonth.user.login.federate >
-                                metricsLastMonth.user.login.federate
+                                metricsThisMonth.users.login.federate >
+                                metricsLastMonth.users.login.federate
                                     ? true
                                     : false,
                             difference:
-                                metricsThisMonth.user.login.federate -
-                                metricsLastMonth.user.login.federate,
+                                metricsThisMonth.users.login.federate -
+                                metricsLastMonth.users.login.federate,
                         },
                     },
                     passwordRecovery: {
-                        value: metricsThisMonth.user.passwordRecovery,
+                        value: metricsThisMonth.users.passwordRecovery,
                         profit:
-                            metricsThisMonth.user.passwordRecovery >
-                            metricsLastMonth.user.passwordRecovery
+                            metricsThisMonth.users.passwordRecovery >
+                            metricsLastMonth.users.passwordRecovery
                                 ? true
                                 : false,
                         difference:
-                            metricsThisMonth.user.passwordRecovery -
-                            metricsLastMonth.user.passwordRecovery,
+                            metricsThisMonth.users.passwordRecovery -
+                            metricsLastMonth.users.passwordRecovery,
                     },
                 },
             };
