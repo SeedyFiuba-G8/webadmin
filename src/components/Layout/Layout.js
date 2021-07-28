@@ -11,66 +11,66 @@ import UserMetrics from '../../controllers/UserMetrics';
 import ProjectMetrics from '../../controllers/ProjectMetrics';
 
 function Layout(props) {
-    var classes = getStyles();
+	var classes = getStyles();
 
-    return (
-        <div className={classes.root}>
-            <>
-                <Sidebar />
-                <div className={classes.content}>
-                    <Switch>
-                        <Route
-                            exact
-                            path="/app"
-                            render={() => <Redirect to="/app/projects" />}
-                        />
-                        <Route
-                            exact
-                            path="/app/projects"
-                            component={Projects}
-                        />
-                        <Route
-                            exact
-                            path="/app/projects/:id"
-                            component={Project}
-                        />
-                        <Route exact path="/app/users" component={Users} />
-                        <Route exact path="/app/users/:id" component={User} />
-                        <Route
-                            exact
-                            path="/app/services"
-                            component={Services}
-                        />
-                        <Route
-                            exact
-                            path="/app/usermetrics"
-                            component={UserMetrics}
-                        />
-                        <Route
-                            exact
-                            path="/app/projectmetrics"
-                            component={ProjectMetrics}
-                        />
-                        {/* Default */}
-                        <Route component={Error} />
-                    </Switch>
-                </div>
-            </>
-        </div>
-    );
+	return (
+		<div className={classes.root}>
+			<>
+				<Sidebar />
+				<div className={classes.content}>
+					<Switch>
+						<Route
+							exact
+							path='/app'
+							render={() => <Redirect to='/app/projects' />}
+						/>
+						<Route
+							exact
+							path='/app/projects'
+							component={Projects}
+						/>
+						<Route
+							exact
+							path='/app/projects/:id'
+							component={Project}
+						/>
+						<Route exact path='/app/users' component={Users} />
+						<Route exact path='/app/users/:id' component={User} />
+						<Route
+							exact
+							path='/app/services'
+							component={Services}
+						/>
+						<Route
+							exact
+							path='/app/usermetrics'
+							component={UserMetrics}
+						/>
+						<Route
+							exact
+							path='/app/projectmetrics'
+							component={ProjectMetrics}
+						/>
+						{/* Default */}
+						<Route component={Error} />
+					</Switch>
+				</div>
+			</>
+		</div>
+	);
 }
 const getStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        maxWidth: '100vw',
-        overflowX: 'hidden',
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        width: `calc(100vw - 240px)`,
-        minHeight: '100vh',
-    },
+	root: {
+		display: 'flex',
+		maxWidth: '100vw',
+		overflowX: 'hidden',
+	},
+	content: {
+		flexGrow: 1,
+		padding: theme.spacing(3),
+		width: `calc(100vw - 240px)`,
+		minHeight: '100vh',
+	},
 }));
 
 export default withRouter(Layout);
