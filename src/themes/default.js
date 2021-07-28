@@ -45,7 +45,7 @@ const defaultTheme = {
             hint: '#008080',
         },
         background: {
-            default: '#F6F7FF',
+            default: '#F0F0F0',
             light: '#FAFAFA',
         },
     },
