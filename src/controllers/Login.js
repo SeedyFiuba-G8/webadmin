@@ -106,14 +106,14 @@ function Login(props) {
                             Login
                         </Button>
                     )}
-                    <Button
+                    {/* <Button
                         color="primary"
                         size="large"
                         className={classes.forgetButton}
                         disabled
                     >
                         Not admin?
-                    </Button>
+                    </Button> */}
                 </div>
             </div>
         </Grid>
