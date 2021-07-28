@@ -1,12 +1,5 @@
-import React, { useState } from 'react';
-import {
-    Paper,
-    IconButton,
-    Menu,
-    MenuItem,
-    Typography,
-} from '@material-ui/core';
-import { MoreVert as MoreIcon } from '@material-ui/icons';
+import React from 'react';
+import { Paper, Typography } from '@material-ui/core';
 import classnames from 'classnames';
 import { makeStyles } from '@material-ui/styles';
 
@@ -24,10 +17,6 @@ export default function Widget({
     ...props
 }) {
     var classes = useStyles();
-
-    // local
-    var [moreButtonRef, setMoreButtonRef] = useState(null);
-    var [isMoreMenuOpen, setMoreMenuOpen] = useState(false);
 
     return (
         <div className={classes.widgetWrapper} style={style && { ...style }}>
@@ -49,18 +38,6 @@ export default function Widget({
                             >
                                 {title}
                             </Typography>
-                            {!disableWidgetMenu && (
-                                <IconButton
-                                    color="primary"
-                                    classes={{ root: classes.moreButton }}
-                                    aria-owns="widget-menu"
-                                    aria-haspopup="true"
-                                    onClick={() => setMoreMenuOpen(true)}
-                                    buttonRef={setMoreButtonRef}
-                                >
-                                    <MoreIcon />
-                                </IconButton>
-                            )}
                         </React.Fragment>
                     )}
                 </div>
@@ -73,20 +50,6 @@ export default function Widget({
                     {children}
                 </div>
             </Paper>
-            <Menu
-                id="widget-menu"
-                open={isMoreMenuOpen}
-                anchorEl={moreButtonRef}
-                onClose={() => setMoreMenuOpen(false)}
-                disableAutoFocusItem
-            >
-                <MenuItem>
-                    <Typography>Copy</Typography>
-                </MenuItem>
-                <MenuItem>
-                    <Typography>Print</Typography>
-                </MenuItem>
-            </Menu>
         </div>
     );
 }
