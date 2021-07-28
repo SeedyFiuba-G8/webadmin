@@ -5,7 +5,7 @@ import {
 import classnames from 'classnames';
 
 export default function ProfitSection(props) {
-    if (props.value === 0) {
+    if (props.value === 0 || props.value === '-') {
         return <DragHandleIcon />;
     } else {
         return (
