@@ -2,21 +2,21 @@ import { getEventsUsersMetric } from '../metricsQuery';
 
 var defaultData = {
     admins: {
-        register: { value: 13, profit: true, difference: 7 },
-        login: { value: 830, profit: false, difference: -2 },
-        ban: { value: 830, profit: false, difference: -2 },
-        unban: { value: 830, profit: false, difference: -2 },
+        register: { value: '-', profit: true, difference: '-' },
+        login: { value: '-', profit: false, difference: '-' },
+        ban: { value: '-', profit: false, difference: '-' },
+        unban: { value: '-', profit: false, difference: '-' },
     },
     users: {
         register: {
-            native: { value: 830, profit: false, difference: -2 },
-            federate: { value: 830, profit: false, difference: -2 },
+            native: { value: '-', profit: true, difference: '-' },
+            federate: { value: '-', profit: true, difference: '-' },
         },
         login: {
-            native: { value: 830, profit: false, difference: -2 },
-            federate: { value: 21, profit: true, difference: 7 },
+            native: { value: '-', profit: true, difference: '-' },
+            federate: { value: '-', profit: true, difference: '-' },
         },
-        passwordRecovery: { value: 28, profit: false, difference: -3 },
+        passwordRecovery: { value: '-', profit: true, difference: '-' },
     },
 };
 
