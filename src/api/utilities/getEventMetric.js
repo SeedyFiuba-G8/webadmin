@@ -1,6 +1,6 @@
-import { getEventsUsersMetric } from '../metricsQuery';
+import { getEventsUsersMetric, getEventsProjectsMetric } from '../metricsQuery';
 
-var defaultData = {
+const defaultData = {
     admins: {
         register: { value: '-', profit: true, difference: '-' },
         login: { value: '-', profit: false, difference: '-' },
@@ -20,12 +20,194 @@ var defaultData = {
     },
 };
 
+const defaultProjectData = {
+    create: { value: '-', profit: false, difference: '-' },
+    publish: { value: '-', profit: false, difference: '-' },
+};
+
 const dateRange = {
     DAILY: 'daily',
     WEEKLY: 'weekly',
     MONTHLY: 'monthly',
 };
 
+async function getEventsProjectsMetricData(
+    dateVariation,
+    setUserIdValue,
+    userIdValue,
+    setIsLoading,
+    setOpen,
+    setTempValue,
+    setError
+) {
+    const actualDate = new Date();
+    const today = new Date(
+        actualDate.getFullYear(),
+        actualDate.getMonth(),
+        actualDate.getDate()
+    );
+    const configId = {
+        initialDate: today,
+        userId: userIdValue,
+    };
+
+    var id = undefined;
+    const metricsId = await getEventsProjectsMetric(configId);
+    console.log('el projecto de testeo es ', metricsId);
+    if (metricsId.create === undefined) {
+        console.log('aca llegue');
+        setOpen(true);
+        setUserIdValue(undefined);
+        setTempValue('');
+        setError(metricsId);
+    } else {
+        id = userIdValue;
+    }
+
+    setIsLoading(false);
+
+    console.log('response', metricsId);
+    switch (dateVariation) {
+        case dateRange.DAILY:
+            const lastDay = new Date(
+                actualDate.getFullYear(),
+                actualDate.getMonth(),
+                actualDate.getDate() - 1
+            );
+            const configToday = {
+                initialDate: today,
+                finalDate: actualDate,
+                userId: id,
+            };
+            const configLastDay = {
+                initialDate: lastDay,
+                finalDate: today,
+                userId: id,
+            };
+
+            const metricsToday = await getEventsProjectsMetric(configToday);
+            const metricsLastDay = await getEventsProjectsMetric(configLastDay);
+
+            return {
+                create: {
+                    value: metricsToday.create,
+                    profit:
+                        metricsToday.create > metricsLastDay.create
+                            ? true
+                            : false,
+                    difference: metricsToday.create - metricsLastDay.create,
+                },
+                publish: {
+                    value: metricsToday.create,
+                    profit:
+                        metricsToday.create > metricsLastDay.create
+                            ? true
+                            : false,
+                    difference: metricsToday.create - metricsLastDay.create,
+                },
+            };
+        case dateRange.WEEKLY:
+            const lastWeek = new Date(
+                actualDate.getFullYear(),
+                actualDate.getMonth(),
+                actualDate.getDate() - 14
+            );
+            const thisWeek = new Date(
+                actualDate.getFullYear(),
+                actualDate.getMonth(),
+                actualDate.getDate() - 7
+            );
+
+            const configThisWeek = {
+                initialDate: thisWeek,
+                finalDate: actualDate,
+                userId: id,
+            };
+            const configLastWeek = {
+                initialDate: lastWeek,
+                finalDate: thisWeek,
+                userId: id,
+            };
+
+            const metricsThisWeek = await getEventsProjectsMetric(
+                configThisWeek
+            );
+            const metricsLastWeek = await getEventsProjectsMetric(
+                configLastWeek
+            );
+
+            return {
+                create: {
+                    value: metricsThisWeek.create,
+                    profit:
+                        metricsThisWeek.create > metricsLastWeek.create
+                            ? true
+                            : false,
+                    difference: metricsThisWeek.create - metricsLastWeek.create,
+                },
+                publish: {
+                    value: metricsThisWeek.create,
+                    profit:
+                        metricsThisWeek.create > metricsLastWeek.create
+                            ? true
+                            : false,
+                    difference: metricsThisWeek.create - metricsLastWeek.create,
+                },
+            };
+        case dateRange.MONTHLY:
+            const lastMonth = new Date(
+                actualDate.getFullYear(),
+                actualDate.getMonth() - 2,
+                actualDate.getDate()
+            );
+            const thisMonth = new Date(
+                actualDate.getFullYear(),
+                actualDate.getMonth() - 1,
+                actualDate.getDate()
+            );
+
+            const configThisMonth = {
+                initialDate: thisMonth,
+                finalDate: actualDate,
+                userId: id,
+            };
+            const configLastMonth = {
+                initialDate: lastMonth,
+                finalDate: thisMonth,
+                userId: id,
+            };
+
+            const metricsThisMonth = await getEventsProjectsMetric(
+                configThisMonth
+            );
+            const metricsLastMonth = await getEventsProjectsMetric(
+                configLastMonth
+            );
+
+            return {
+                create: {
+                    value: metricsThisMonth.create,
+                    profit:
+                        metricsThisMonth.create > metricsLastMonth.create
+                            ? true
+                            : false,
+                    difference:
+                        metricsThisMonth.create - metricsLastMonth.create,
+                },
+                publish: {
+                    value: metricsThisMonth.create,
+                    profit:
+                        metricsThisMonth.create > metricsLastMonth.create
+                            ? true
+                            : false,
+                    difference:
+                        metricsThisMonth.create - metricsLastMonth.create,
+                },
+            };
+        default:
+            return defaultProjectData;
+    }
+}
 async function getEventsUsersMetricData(dateVariation) {
     const actualDate = new Date();
     const today = new Date(
@@ -434,4 +616,10 @@ async function getEventsUsersMetricData(dateVariation) {
     }
 }
 
-export { dateRange, getEventsUsersMetricData, defaultData };
+export {
+    dateRange,
+    getEventsUsersMetricData,
+    getEventsProjectsMetricData,
+    defaultData,
+    defaultProjectData,
+};

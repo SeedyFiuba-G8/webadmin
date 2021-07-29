@@ -1,11 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, TextField, Button, CircularProgress } from '@material-ui/core';
+import {
+    Grid,
+    TextField,
+    Button,
+    CircularProgress,
+    Select,
+    MenuItem,
+    Input,
+} from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 import { withRouter } from 'react-router';
 import PageTitle from '../components/PageTitle';
+import classnames from 'classnames';
 import { getBasicProjectsMetric } from '../api/metricsQuery';
 import { makeStyles } from '@material-ui/core';
 import Widget from '../components/Widget/Widget';
 import { Typography } from '../components/Wrappers/Wrappers';
+import {
+    getEventsProjectsMetricData,
+    dateRange,
+    defaultProjectData,
+} from '../api/utilities/getEventMetric';
+import ProfitSection from '../components/ProfitSection';
 
 function ProjectMetrics(props) {
     const [metrics, setMetrics] = useState({});
@@ -16,18 +37,47 @@ function ProjectMetrics(props) {
     }, []);
     var classes = getStyles();
 
-    var [userIdValue, setUserIdValue] = useState('');
-    var [isLoading, setIsLoading] = useState(false);
-    // console.log(metrics);
+    const [open, setOpen] = useState(false);
+    const [error, setError] = useState([]);
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const [tempVaule, setTempValue] = useState('');
+    const [userIdValue, setUserIdValue] = useState(undefined);
+    const [isLoading, setIsLoading] = useState(false);
+    const [dateVariation, setDateVariation] = useState(dateRange.DAILY);
+
+    const [metricsEvent, setMetricsEvent] = useState(defaultProjectData);
+    useEffect(() => {
+        const LoadMetrics = async () =>
+            setMetricsEvent(
+                await getEventsProjectsMetricData(
+                    dateVariation,
+                    setUserIdValue,
+                    userIdValue,
+                    setIsLoading,
+                    setOpen,
+                    setTempValue,
+                    setError
+                )
+            );
+        LoadMetrics();
+        setIsLoading(true);
+    }, [dateVariation, userIdValue]);
 
     return (
         <>
             <PageTitle title="User Metrics" />
             <Grid container spacing={2}>
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                     <Widget
-                        title="General Statistics"
-                        upperTitle
+                        header={
+                            <div className={classes.title}>
+                                <Typography variant="h5">
+                                    General Metrics
+                                </Typography>
+                            </div>
+                        }
                         bodyClass={classes.fullHeightBody}
                         className={classes.card}
                     >
@@ -107,10 +157,15 @@ function ProjectMetrics(props) {
             </Grid>
             <div>
                 <Grid container spacing={2}>
-                    <Grid item xs={12}>
+                    <Grid item xs={6}>
                         <Widget
-                            title="General Statistics"
-                            upperTitle
+                            header={
+                                <div className={classes.title}>
+                                    <Typography variant="h5">
+                                        Additional Option
+                                    </Typography>
+                                </div>
+                            }
                             bodyClass={classes.fullHeightBody}
                             className={classes.card}
                         >
@@ -120,7 +175,7 @@ function ProjectMetrics(props) {
                                 justify="space-between"
                                 alignItems="center"
                             >
-                                <Grid item xs={4}>
+                                <Grid item xs={6}>
                                     <TextField
                                         id="userId"
                                         InputProps={{
@@ -130,9 +185,9 @@ function ProjectMetrics(props) {
                                                 input: classes.textField,
                                             },
                                         }}
-                                        value={userIdValue}
+                                        value={tempVaule}
                                         onChange={(e) =>
-                                            setUserIdValue(e.target.value)
+                                            setTempValue(e.target.value)
                                         }
                                         margin="normal"
                                         placeholder="userId"
@@ -149,26 +204,147 @@ function ProjectMetrics(props) {
                                             />
                                         ) : (
                                             <Button
-                                                disabled={
-                                                    userIdValue.length === 0
-                                                }
-                                                onClick={() => setIsLoading()}
+                                                disabled={tempVaule === 0}
+                                                onClick={() => {
+                                                    setUserIdValue(tempVaule);
+                                                }}
                                                 variant="contained"
                                                 color="primary"
                                                 size="large"
                                                 style={{
                                                     alignSelf: 'flex-start',
                                                     position: 'absolute',
-                                                    bottom: 467,
-                                                    left: 675,
+                                                    bottom: 450,
+                                                    left: 565,
                                                 }}
                                             >
                                                 Apply
                                             </Button>
                                         )}
                                     </div>
+                                    <div>
+                                        <Dialog
+                                            open={open}
+                                            onClose={handleClose}
+                                            aria-labelledby="error"
+                                        >
+                                            <DialogTitle>
+                                                Error: {error.status}-
+                                                {error.name}
+                                            </DialogTitle>
+                                            <DialogContent>
+                                                <DialogContentText>
+                                                    Error: {error.message}
+                                                </DialogContentText>
+                                            </DialogContent>
+                                            <DialogActions>
+                                                <Button
+                                                    onClick={handleClose}
+                                                    color="primary"
+                                                >
+                                                    Close
+                                                </Button>
+                                            </DialogActions>
+                                        </Dialog>
+                                    </div>
                                 </Grid>
                             </Grid>
+                        </Widget>
+                    </Grid>
+                </Grid>
+            </div>
+            <div>
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <Widget
+                            header={
+                                <div className={classes.title}>
+                                    <Typography variant="h5">
+                                        Specific Metrics
+                                    </Typography>
+                                    <Select
+                                        value={dateVariation}
+                                        onChange={(e) =>
+                                            setDateVariation(e.target.value)
+                                        }
+                                        input={
+                                            <Input
+                                                disableUnderline
+                                                classes={{
+                                                    input: classes.selectInput,
+                                                }}
+                                            />
+                                        }
+                                        className={classes.select}
+                                    >
+                                        <MenuItem value="daily">Daily</MenuItem>
+                                        <MenuItem value="weekly">
+                                            Weekly
+                                        </MenuItem>
+                                        <MenuItem value="monthly">
+                                            Monthly
+                                        </MenuItem>
+                                    </Select>
+                                </div>
+                            }
+                            bodyClass={classes.bodyWidgetOverflow}
+                        >
+                            <div className={classes.bottomStatsContainer}>
+                                <div className={classnames(classes.statCell)}>
+                                    <Grid container alignItems="center">
+                                        <Typography variant="h6">
+                                            {metricsEvent.create.value} (
+                                        </Typography>
+                                        <Typography variant="h6">
+                                            {metricsEvent.create.difference}
+                                        </Typography>
+                                        <ProfitSection
+                                            value={
+                                                metricsEvent.create.difference
+                                            }
+                                            classes={classes}
+                                            increase={
+                                                metricsEvent.create.profit
+                                            }
+                                        />
+                                        <Typography variant="h6">)</Typography>
+                                    </Grid>
+                                    <Typography
+                                        size="sm"
+                                        color="text"
+                                        colorBrightness="secondary"
+                                    >
+                                        Registers
+                                    </Typography>
+                                </div>
+                                <div className={classes.statCell}>
+                                    <Grid container alignItems="center">
+                                        <Typography variant="h6">
+                                            {metricsEvent.publish.value} (
+                                        </Typography>
+                                        <Typography variant="h6">
+                                            {metricsEvent.publish.difference}
+                                        </Typography>
+                                        <ProfitSection
+                                            value={
+                                                metricsEvent.publish.difference
+                                            }
+                                            classes={classes}
+                                            increase={
+                                                metricsEvent.publish.profit
+                                            }
+                                        />
+                                        <Typography variant="h6">)</Typography>
+                                    </Grid>
+                                    <Typography
+                                        size="sm"
+                                        color="text"
+                                        colorBrightness="secondary"
+                                    >
+                                        Logins
+                                    </Typography>
+                                </div>
+                            </div>
                         </Widget>
                     </Grid>
                 </Grid>
@@ -178,6 +354,14 @@ function ProjectMetrics(props) {
 }
 
 const getStyles = makeStyles((theme) => ({
+    title: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
+        width: '100%',
+        marginBottom: theme.spacing(1),
+    },
     subTitleContainer: {
         display: 'flex',
         alignItems: 'center',
@@ -204,6 +388,34 @@ const getStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
+    },
+    bottomStatsContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        margin: theme.spacing(1) * -2,
+        marginTop: theme.spacing(1),
+    },
+    statCell: {
+        padding: theme.spacing(2),
+    },
+    bodyWidgetOverflow: {
+        overflow: 'auto',
+    },
+
+    profitArrow: {
+        transform: 'rotate(-90deg)',
+        fill: theme.palette.success.main,
+    },
+    profitArrowDanger: {
+        transform: 'rotate(90deg)',
+        fill: theme.palette.secondary.main,
+    },
+    selectInput: {
+        padding: 10,
+        paddingRight: 25,
+        '&:focus': {
+            backgroundColor: 'white',
+        },
     },
 }));
 
