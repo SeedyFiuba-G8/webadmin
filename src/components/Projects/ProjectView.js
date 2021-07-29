@@ -1,4 +1,4 @@
-import { useEffect, useState, React } from 'react';
+import { useEffect, useState, React, useRef } from 'react';
 import { getProject } from '../../api/projectsQuery';
 import ProjectStyle from './ProjectStyle';
 import VisualDetail from '../VisualDetail';
@@ -8,8 +8,14 @@ import TemporaryImg from '../../assets/temporary-img.jpg';
 
 export default function ProjectView(props) {
     const [project, setProject] = useState({});
+    const mountedRef = useRef(true);
+
     useEffect(() => {
-        const loadProjects = async () => setProject(await getProject(props.id));
+        const loadProjects = async () => {
+            const projectData = await getProject(props.id);
+            if (!mountedRef.current) return;
+            setProject(projectData);
+        };
         loadProjects();
     }, [props.id]);
 
@@ -23,57 +29,57 @@ export default function ProjectView(props) {
     return (
         <>
             <CssBaseline />
-            <Container maxWidth="lg">
+            <Container maxWidth='lg'>
                 <ProjectStyle post={projectStyle} />
-                <Typography variant="h3" gutterBottom>
+                <Typography variant='h3' gutterBottom>
                     Project Status
                 </Typography>
                 <Grid container spacing={2}>
                     <VisualBlockedButton
                         size={4}
-                        title="Block"
+                        title='Block'
                         blocked={project.blocked}
                         id={project.id}
                     />
                 </Grid>
-                <Typography variant="h3" gutterBottom>
+                <Typography variant='h3' gutterBottom>
                     General Info
                 </Typography>
 
                 <Grid container spacing={2}>
                     <VisualDetail
                         size={4}
-                        title="Objective"
+                        title='Objective'
                         info={project.objective}
                     />
                 </Grid>
 
-                <Typography variant="h3" gutterBottom>
+                <Typography variant='h3' gutterBottom>
                     Location
                 </Typography>
 
                 <Grid container spacing={2}>
                     <VisualDetail
                         size={4}
-                        title="Country"
+                        title='Country'
                         info={project.country}
                     />
-                    <VisualDetail size={4} title="City" info={project.city} />
+                    <VisualDetail size={4} title='City' info={project.city} />
                 </Grid>
 
-                <Typography variant="h3" gutterBottom>
+                <Typography variant='h3' gutterBottom>
                     Timeline
                 </Typography>
 
                 <Grid container spacing={2}>
                     <VisualDetail
                         size={4}
-                        title="Published on"
+                        title='Published on'
                         info={project.publishedOn}
                     />
                     <VisualDetail
                         size={4}
-                        title="Finalized by"
+                        title='Finalized by'
                         info={project.finalizedBy}
                     />
                 </Grid>

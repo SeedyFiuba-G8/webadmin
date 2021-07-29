@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
 	Table,
 	TableRow,
@@ -19,18 +19,22 @@ import { fetchHealth, fetchInfo } from './Fetch';
 const colorByState = {
 	UP: 'primary',
 	DOWN: 'secondary',
-	'-': 'grey',
-	'N/A': 'grey',
+	'-': undefined,
+	'N/A': undefined,
 };
 
 export default function ServicesTable() {
 	const [health, setHealth] = React.useState(defaults.health);
 	const [info, setInfo] = React.useState(defaults.info);
+	const mountedRef = useRef(true);
 
 	useEffect(() => {
 		(async () => {
-			setHealth(await fetchHealth());
-			setInfo(await fetchInfo());
+			const resHealth = await fetchHealth();
+			const resInfo = await fetchInfo();
+			if (!mountedRef.current) return;
+			setHealth(resHealth);
+			setInfo(resInfo);
 		})();
 	}, []);
 

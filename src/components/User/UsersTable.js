@@ -1,171 +1,173 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MUIDataTable from 'mui-datatables';
 import { getAllUsers } from '../../api/usersQuery';
 import { withRouter } from 'react-router-dom';
+import { CircularProgress } from '@material-ui/core';
 import _ from 'lodash';
 
 function UsersTable(props) {
-	const [config, setConfig] = useState({
-		limit: 3,
-		offset: 0,
-	});
-	const [users, setUsers] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
-	useEffect(() => {
-		const loadData = async () => {
-			setUsers(await getAllUsers(config));
-			setIsLoading(false);
-		};
-		console.log('Reloading with config: ', config);
-		loadData();
-	}, [config]);
+  const [config, setConfig] = useState({
+    limit: 3,
+    offset: 0,
+  });
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const mountedRef = useRef(true);
 
-	function onRowClickAction(rowData) {
-		const id = rowData[0];
-		props.history.push('users/' + id);
-	}
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await getAllUsers(config);
+      if (!mountedRef.current) return;
+      setUsers(data);
+      setIsLoading(false);
+    };
+    console.log('Reloading with config: ', config);
+    loadData();
+  }, [config]);
 
-	function updateConfig(update) {
-		setConfig({ ...config, ...update });
-	}
+  function onRowClickAction(rowData) {
+    const id = rowData[0];
+    props.history.push('users/' + id);
+  }
 
-	function changePage(page) {
-		updateConfig({ offset: Math.floor(page / config.limit) });
-	}
+  function updateConfig(update) {
+    setConfig({ ...config, ...update });
+  }
 
-	function changeRowsPerPage(rows) {
-		console.log('changed page number');
-		updateConfig({ limit: rows });
-	}
+  function changePage(page) {
+    updateConfig({ offset: Math.floor(page / config.limit) });
+  }
 
-	function sortByColumn(column, direction) {
-		console.log('Columns sort by:', column, 'direction:', direction);
-		// updateConfig({
-		//     sortColumn: column,
-		//     sortAsc: direction === 'asc' ? true : false,
-		// });
-	}
+  function changeRowsPerPage(rows) {
+    console.log('changed page number');
+    updateConfig({ limit: rows });
+  }
 
-	function removeField(field) {
-		var config_aux = { ...config };
-		_.unset(config_aux, field);
-		setConfig(config_aux);
-	}
+  function sortByColumn(column, direction) {
+    console.log('Columns sort by:', column, 'direction:', direction);
+    // updateConfig({
+    //     sortColumn: column,
+    //     sortAsc: direction === 'asc' ? true : false,
+    // });
+  }
 
-	function changeFilters(columnChanged, filterList, changedColumnIndex) {
-		if (changedColumnIndex == null) {
-			setConfig({
-				limit: 3,
-				offset: 0,
-			});
-		} else if (filterList[changedColumnIndex].length === 0) {
-			console.log('Removed field:', columnChanged);
-			removeField(columnChanged);
-		} else {
-			var update = {};
-			update[columnChanged] = filterList[changedColumnIndex][0];
-			updateConfig(update);
-		}
-	}
+  function removeField(field) {
+    var config_aux = { ...config };
+    _.unset(config_aux, field);
+    setConfig(config_aux);
+  }
 
-	return (
-		<>
-			<MUIDataTable
-				title={'All system users'}
-				data={users}
-				columns={users.length > 0 ? columns : []}
-				options={{
-					textLabels: {
-						body: {
-							noMatch: isLoading
-								? 'Loading...'
-								: 'There are no users registered.',
-						},
-					},
-					selectableRows: 'none',
-					onRowClick: onRowClickAction,
-					resizableColumns: true,
-					page: config.offset * config.limit,
-					rowsPerPage: config.limit,
-					jumpToPage: true,
-					download: false,
-					rowsPerPageOptions: [1, 3, 5, 10, 15, 50],
-					onChangePage: changePage,
-					onChangeRowsPerPage: changeRowsPerPage,
-					onColumnSortChange: sortByColumn,
-					onFilterChange: (
-						columnChanged,
-						filterList,
-						type,
-						changedColumnIndex
-					) => {
-						changeFilters(
-							columnChanged,
-							filterList,
-							changedColumnIndex
-						);
-					},
-				}}
-			/>
-		</>
-	);
+  function changeFilters(columnChanged, filterList, changedColumnIndex) {
+    if (changedColumnIndex == null) {
+      setConfig({
+        limit: 3,
+        offset: 0,
+      });
+    } else if (filterList[changedColumnIndex].length === 0) {
+      console.log('Removed field:', columnChanged);
+      removeField(columnChanged);
+    } else {
+      var update = {};
+      update[columnChanged] = filterList[changedColumnIndex][0];
+      updateConfig(update);
+    }
+  }
+
+  return (
+    <>
+      <MUIDataTable
+        title={'All system users'}
+        data={users}
+        columns={users.length > 0 ? columns : []}
+        options={{
+          textLabels: {
+            body: {
+              noMatch: isLoading ? (
+                <CircularProgress />
+              ) : (
+                'There are no users registered.'
+              ),
+            },
+          },
+          selectableRows: 'none',
+          onRowClick: onRowClickAction,
+          page: config.offset * config.limit,
+          rowsPerPage: config.limit,
+          jumpToPage: true,
+          download: false,
+          rowsPerPageOptions: [1, 3, 5, 10, 15, 50],
+          onChangePage: changePage,
+          onChangeRowsPerPage: changeRowsPerPage,
+          onColumnSortChange: sortByColumn,
+          onFilterChange: (
+            columnChanged,
+            filterList,
+            type,
+            changedColumnIndex
+          ) => {
+            changeFilters(columnChanged, filterList, changedColumnIndex);
+          },
+        }}
+      />
+    </>
+  );
 }
 
 const columns = [
-	{
-		name: 'id',
-		label: 'id',
-		options: {
-			filter: false,
-		},
-	},
-	{
-		name: 'firstName',
-		label: 'First Name',
-		options: {
-			filter: true,
-			customFilterListOptions: {
-				render: (v) => `First Name: ${v}`,
-			},
-			filterType: 'textField',
-		},
-	},
-	{
-		name: 'lastName',
-		label: 'Last Name',
-		options: {
-			filter: true,
-			customFilterListOptions: {
-				render: (v) => `Last Name: ${v}`,
-			},
-			filterType: 'textField',
-		},
-	},
-	{
-		name: 'email',
-		label: 'E-mail',
-		options: {
-			filter: false,
-		},
-	},
-	{
-		name: 'banned',
-		label: 'Banned',
-		options: {
-			filter: true,
-			customFilterListOptions: {
-				render: (v) => `Banned: ${v}`,
-			},
-			filterOptions: {
-				names: ['true', 'false'],
-			},
+  {
+    name: 'id',
+    label: 'id',
+    options: {
+      filter: false,
+    },
+  },
+  {
+    name: 'firstName',
+    label: 'First Name',
+    options: {
+      filter: true,
+      customFilterListOptions: {
+        render: (v) => `First Name: ${v}`,
+      },
+      filterType: 'textField',
+    },
+  },
+  {
+    name: 'lastName',
+    label: 'Last Name',
+    options: {
+      filter: true,
+      customFilterListOptions: {
+        render: (v) => `Last Name: ${v}`,
+      },
+      filterType: 'textField',
+    },
+  },
+  {
+    name: 'email',
+    label: 'E-mail',
+    options: {
+      filter: false,
+    },
+  },
+  {
+    name: 'banned',
+    label: 'Banned',
+    options: {
+      filter: true,
+      customFilterListOptions: {
+        render: (v) => `Banned: ${v}`,
+      },
+      filterOptions: {
+        names: ['true', 'false'],
+      },
 
-			filterType: 'dropdown',
-			customBodyRender: (val) => {
-				return val === true ? 'true' : 'false';
-			},
-		},
-	},
+      filterType: 'dropdown',
+      customBodyRender: (val) => {
+        return val === true ? 'true' : 'false';
+      },
+    },
+  },
 ];
 
 export default withRouter(UsersTable);

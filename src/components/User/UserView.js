@@ -1,4 +1,4 @@
-import { useEffect, useState, React } from 'react';
+import { useEffect, useState, React, useRef } from 'react';
 import { getUser } from '../../api/usersQuery';
 import VisualDetail from '../VisualDetail';
 import VisualBlockedButton from '../VisualUserBlockedButton';
@@ -6,8 +6,14 @@ import { CssBaseline, Grid, Container, Typography } from '@material-ui/core';
 
 export default function UserView(props) {
     const [user, setUser] = useState({});
+    const mountedRef = useRef(true);
+
     useEffect(() => {
-        const loadUser = async () => setUser(await getUser(props.id));
+        const loadUser = async () => {
+            const userData = await getUser(props.id);
+            if (!mountedRef.current) return;
+            setUser(userData);
+        }
         loadUser();
     }, [props.id]);
 
