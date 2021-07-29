@@ -16,10 +16,11 @@ function ProjectsTable(props) {
 
   useEffect(() => {
     const loadData = async () => {
-      const data = await getAllProjects(config);
-      if (!mountedRef.current) return;
-      setProjects(data);
-      setIsLoading(false);
+      getAllProjects(config).then((data) => {
+        if (!mountedRef.current) return;
+        setProjects(data);
+        setIsLoading(false);
+      });
     };
     console.log('Reloading with config: ', config);
     loadData();

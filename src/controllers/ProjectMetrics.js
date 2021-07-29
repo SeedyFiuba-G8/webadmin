@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Grid,
   TextField,
@@ -30,8 +30,14 @@ import ProfitSection from '../components/ProfitSection';
 
 function ProjectMetrics(props) {
   const [metrics, setMetrics] = useState({});
+  const mountedRef = useRef(true);
+
   useEffect(() => {
-    const LoadMetrics = async () => setMetrics(await getBasicProjectsMetric());
+    const LoadMetrics = async () => {
+      const projectMetrics = await getBasicProjectsMetric();
+      if (!mountedRef.current) return;
+      setMetrics(projectMetrics);
+    };
     LoadMetrics();
   }, []);
   var classes = getStyles();
@@ -48,18 +54,19 @@ function ProjectMetrics(props) {
 
   const [metricsEvent, setMetricsEvent] = useState(defaultProjectData);
   useEffect(() => {
-    const LoadMetrics = async () =>
-      setMetricsEvent(
-        await getEventsProjectsMetricData(
-          dateVariation,
-          setUserIdValue,
-          userIdValue,
-          setIsLoading,
-          setOpen,
-          setTempValue,
-          setError
-        )
+    const LoadMetrics = async () => {
+      const metricsEventData = await getEventsProjectsMetricData(
+        dateVariation,
+        setUserIdValue,
+        userIdValue,
+        setIsLoading,
+        setOpen,
+        setTempValue,
+        setError
       );
+      if (!mountedRef.current) return;
+      setMetricsEvent(metricsEventData);
+    };
     LoadMetrics();
     setIsLoading(true);
   }, [dateVariation, userIdValue]);
