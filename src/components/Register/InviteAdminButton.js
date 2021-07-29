@@ -34,7 +34,7 @@ export default function InviteAdmin() {
         setSuccessOpen(false);
     };
     return (
-        <div>
+        <div style={{display: 'flex'}}>
             <Button
                 variant="contained"
                 color="secondary"
@@ -42,9 +42,7 @@ export default function InviteAdmin() {
                 startIcon={<PersonAddIcon />}
                 // position to define
                 style={{
-                    alignSelf: 'flex-start',
-                    position: 'absolute',
-                    bottom: 70,
+                    display: 'flex'
                 }}
             >
                 Invite Admin

@@ -24,30 +24,29 @@ function Login(props) {
     var [loginValue, setLoginValue] = useState('');
     var [error, setError] = useState(null);
 
+    console.log(error);
+
     return (
         <Grid container className={classes.container}>
             <div className={classes.formContainer}>
                 <div className={classes.logotypeContainer}>
                     <img
                         src={logo}
-                        alt="logo"
+                        alt='logo'
                         className={classes.logotypeImage}
                     />
-                    <Typography className={classes.logotypeText}>
-                        WebAdmin
-                    </Typography>
                 </div>
                 <div className={classes.form}>
                     <Fade in={error}>
                         <Typography
-                            color="error"
+                            color='error'
                             className={classes.errorMessage}
                         >
                             Incorrect email or password.
                         </Typography>
                     </Fade>
                     <TextField
-                        id="email"
+                        id='email'
                         InputProps={{
                             classes: {
                                 underline: classes.textFieldUnderline,
@@ -56,13 +55,13 @@ function Login(props) {
                         }}
                         value={loginValue}
                         onChange={(e) => setLoginValue(e.target.value)}
-                        margin="normal"
-                        placeholder="Email Adress"
-                        type="email"
+                        margin='normal'
+                        placeholder='Email Adress'
+                        type='email'
                         fullWidth
                     />
                     <TextField
-                        id="password"
+                        id='password'
                         InputProps={{
                             classes: {
                                 underline: classes.textFieldUnderline,
@@ -71,9 +70,9 @@ function Login(props) {
                         }}
                         value={passwordValue}
                         onChange={(e) => setPasswordValue(e.target.value)}
-                        margin="normal"
-                        placeholder="Password"
-                        type="password"
+                        margin='normal'
+                        placeholder='Password'
+                        type='password'
                         fullWidth
                     />
                 </div>
@@ -99,9 +98,9 @@ function Login(props) {
                                     setError
                                 )
                             }
-                            variant="contained"
-                            color="primary"
-                            size="large"
+                            variant='contained'
+                            color='primary'
+                            size='large'
                         >
                             Login
                         </Button>
@@ -139,20 +138,10 @@ const getStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        [theme.breakpoints.down('md')]: {
-            width: '40%',
-        },
-        [theme.breakpoints.down('md')]: {
-            display: 'none',
-        },
     },
-    logotypeText: {
-        color: 'black',
-        fontWeight: 500,
-        fontSize: 60,
-        [theme.breakpoints.down('md')]: {
-            fontSize: 48,
-        },
+    logotypeImage: {
+        display: 'flex',
+        height: '100%',
     },
     errorMessage: {
         textAlign: 'center',
@@ -164,9 +153,6 @@ const getStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        [theme.breakpoints.down('md')]: {
-            width: '50%',
-        },
     },
     textFieldUnderline: {
         '&:before': {
@@ -184,9 +170,9 @@ const getStyles = makeStyles((theme) => ({
     },
     formButtons: {
         width: '30%',
-        marginTop: theme.spacing(4),
         display: 'flex',
-        justifyContent: 'space-between',
+        marginTop: theme.spacing(4),
+        justifyContent: 'center',
         alignItems: 'center',
     },
 }));

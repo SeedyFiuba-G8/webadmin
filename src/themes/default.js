@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core';
+import { createTheme } from '@material-ui/core';
 import tinycolor from 'tinycolor2';
 
 const primary = '#008080';
@@ -75,7 +75,7 @@ const overrides = {
 };
 
 const Themes = {
-    default: createMuiTheme({ ...defaultTheme, ...overrides }),
+    default: createTheme({ ...defaultTheme, ...overrides }),
 };
 
 export default Themes;

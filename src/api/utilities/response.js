@@ -7,6 +7,9 @@ export async function handleResponse(response) {
 }
 
 export async function handleError(error) {
-    console.log(error.message);
+    console.log('Response error: ', error.message);
+    if (error.response && error.response.status === 403){
+        //logout
+    }
     throw error;
 }

@@ -12,9 +12,6 @@ export default async function createSession(email, password) {
             loginSuccessful: true,
         };
     } catch (error) {
-        if (error.response) {
-            console.log(error.response.status);
-        }
         return {
             loginSuccessful: false,
         };
