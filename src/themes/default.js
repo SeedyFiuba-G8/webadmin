@@ -1,7 +1,7 @@
-import { createMuiTheme } from '@material-ui/core';
+import { createTheme } from '@material-ui/core';
 import tinycolor from 'tinycolor2';
 
-const primary = '#4CBB17';
+const primary = '#008080';
 const secondary = '#FF5C93';
 const warning = '#FFC260';
 const success = '#3CD4A0';
@@ -42,11 +42,11 @@ const defaultTheme = {
             primary: '#4A4A4A',
             secondary: '#6E6E6E',
             warning: '#FFC260',
-            hint: '#B9B9B9',
+            hint: '#008080',
         },
         background: {
-            default: '#F6F7FF',
-            light: '#F3F5FF',
+            default: '#F0F0F0',
+            light: '#FAFAFA',
         },
     },
 };
@@ -75,7 +75,7 @@ const overrides = {
 };
 
 const Themes = {
-    default: createMuiTheme({ ...defaultTheme, ...overrides }),
+    default: createTheme({ ...defaultTheme, ...overrides }),
 };
 
 export default Themes;

@@ -24,6 +24,8 @@ function Login(props) {
     var [loginValue, setLoginValue] = useState('');
     var [error, setError] = useState(null);
 
+    console.log(error);
+
     return (
         <Grid container className={classes.container}>
             <div className={classes.formContainer}>
@@ -33,9 +35,6 @@ function Login(props) {
                         alt='logo'
                         className={classes.logotypeImage}
                     />
-                    <Typography className={classes.logotypeText}>
-                        WebAdmin
-                    </Typography>
                 </div>
                 <div className={classes.form}>
                     <Fade in={error}>
@@ -106,14 +105,14 @@ function Login(props) {
                             Login
                         </Button>
                     )}
-                    <Button
-                        color='primary'
-                        size='large'
+                    {/* <Button
+                        color="primary"
+                        size="large"
                         className={classes.forgetButton}
                         disabled
                     >
                         Not admin?
-                    </Button>
+                    </Button> */}
                 </div>
             </div>
         </Grid>
@@ -139,20 +138,10 @@ const getStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
-        [theme.breakpoints.down('md')]: {
-            width: '40%',
-        },
-        [theme.breakpoints.down('md')]: {
-            display: 'none',
-        },
     },
-    logotypeText: {
-        color: 'black',
-        fontWeight: 500,
-        fontSize: 60,
-        [theme.breakpoints.down('md')]: {
-            fontSize: 48,
-        },
+    logotypeImage: {
+        display: 'flex',
+        height: '100%',
     },
     errorMessage: {
         textAlign: 'center',
@@ -164,9 +153,6 @@ const getStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        [theme.breakpoints.down('md')]: {
-            width: '50%',
-        },
     },
     textFieldUnderline: {
         '&:before': {
@@ -184,14 +170,10 @@ const getStyles = makeStyles((theme) => ({
     },
     formButtons: {
         width: '30%',
-        marginTop: theme.spacing(4),
         display: 'flex',
-        justifyContent: 'space-between',
+        marginTop: theme.spacing(4),
+        justifyContent: 'center',
         alignItems: 'center',
-    },
-    forgetButton: {
-        textTransform: 'none',
-        fontWeight: 400,
     },
 }));
 
