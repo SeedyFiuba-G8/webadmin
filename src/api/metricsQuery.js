@@ -24,7 +24,7 @@ export async function getBasicProjectsMetric() {
 }
 
 export async function getEventsUsersMetric(config) {
-    console.log('config de llamada es ', config);
+    console.log('config de llamada de user events es ', config);
     try {
         const response = await metricsApiProvider.get(
             'metrics/events/users',
@@ -39,6 +39,7 @@ export async function getEventsUsersMetric(config) {
 }
 
 export async function getEventsProjectsMetric(config) {
+    console.log('config de llamada de project events es ', config);
     try {
         const response = await metricsApiProvider.get(
             'metrics/events/projects',
@@ -48,6 +49,6 @@ export async function getEventsProjectsMetric(config) {
     } catch (error) {
         console.error(error);
         console.log("Couldn't get events projects metrics");
-        return [];
+        return error.response.data;
     }
 }
