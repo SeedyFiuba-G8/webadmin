@@ -75,7 +75,7 @@ function ProjectMetrics(props) {
         <>
             <PageTitle title="Project Metrics" />
             <Grid container spacing={2}>
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                     <Widget
                         header={
                             <div className={classes.title}>
@@ -163,7 +163,7 @@ function ProjectMetrics(props) {
             </Grid>
             <div>
                 <Grid container spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
                         <Widget
                             header={
                                 <div className={classes.title}>
@@ -260,7 +260,7 @@ function ProjectMetrics(props) {
             </div>
             <div>
                 <Grid container spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid item xs={12}>
                         <Widget
                             header={
                                 <div className={classes.title}>
