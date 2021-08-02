@@ -24,29 +24,27 @@ function Login(props) {
     var [loginValue, setLoginValue] = useState('');
     var [error, setError] = useState(null);
 
-    console.log(error);
-
     return (
         <Grid container className={classes.container}>
             <div className={classes.formContainer}>
                 <div className={classes.logotypeContainer}>
                     <img
                         src={logo}
-                        alt='logo'
+                        alt="logo"
                         className={classes.logotypeImage}
                     />
                 </div>
                 <div className={classes.form}>
                     <Fade in={error}>
                         <Typography
-                            color='error'
+                            color="error"
                             className={classes.errorMessage}
                         >
                             Incorrect email or password.
                         </Typography>
                     </Fade>
                     <TextField
-                        id='email'
+                        id="email"
                         InputProps={{
                             classes: {
                                 underline: classes.textFieldUnderline,
@@ -55,13 +53,13 @@ function Login(props) {
                         }}
                         value={loginValue}
                         onChange={(e) => setLoginValue(e.target.value)}
-                        margin='normal'
-                        placeholder='Email Adress'
-                        type='email'
+                        margin="normal"
+                        placeholder="Email Adress"
+                        type="email"
                         fullWidth
                     />
                     <TextField
-                        id='password'
+                        id="password"
                         InputProps={{
                             classes: {
                                 underline: classes.textFieldUnderline,
@@ -70,9 +68,9 @@ function Login(props) {
                         }}
                         value={passwordValue}
                         onChange={(e) => setPasswordValue(e.target.value)}
-                        margin='normal'
-                        placeholder='Password'
-                        type='password'
+                        margin="normal"
+                        placeholder="Password"
+                        type="password"
                         fullWidth
                     />
                 </div>
@@ -98,9 +96,9 @@ function Login(props) {
                                     setError
                                 )
                             }
-                            variant='contained'
-                            color='primary'
-                            size='large'
+                            variant="contained"
+                            color="primary"
+                            size="large"
                         >
                             Login
                         </Button>

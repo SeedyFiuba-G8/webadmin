@@ -25,8 +25,6 @@ export default function VisualUserBlockedButton(props) {
     React.useEffect(() => {
         setChecked(blocked ? true : false);
     }, [blocked]);
-    // console.log('estado de checked es', checked);
-    // console.log('estado de bloqueo es ', blocked);
 
     const toggleChecked = () => {
         setChecked(!checked);

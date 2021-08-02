@@ -26,9 +26,6 @@ export default function VisualProjectBlockedButton(props) {
         setChecked(blocked ? true : false);
     }, [blocked]);
 
-    // console.log('estado de checked es', checked);
-    // console.log('estado de bloqueo es ', blocked);
-
     const toggleChecked = () => {
         setChecked(!checked);
         checked ? unBlockProject(id) : blockProject(id);
