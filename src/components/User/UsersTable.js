@@ -56,7 +56,6 @@ function UsersTable(props) {
                 offset: 0,
             });
         } else if (filterList[changedColumnIndex].length === 0) {
-            console.log('Removed field:', columnChanged);
             removeField(columnChanged);
         } else {
             var update = {};
