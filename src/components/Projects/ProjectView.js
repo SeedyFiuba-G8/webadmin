@@ -58,10 +58,14 @@ export default function ProjectView(props) {
                 </Typography>
 
                 <Grid container spacing={2}>
-                    <VisualDetail size={4} title="Latitud" info={project.lat} />
                     <VisualDetail
                         size={4}
-                        title="Longitud"
+                        title="Latitude"
+                        info={project.lat}
+                    />
+                    <VisualDetail
+                        size={4}
+                        title="Longitude"
                         info={project.long}
                     />
                 </Grid>
@@ -74,12 +78,20 @@ export default function ProjectView(props) {
                     <VisualDetail
                         size={4}
                         title="Published on"
-                        info={project.publishedOn}
+                        info={
+                            project.publishedOn
+                                ? new Date(project.publishedOn).toLocaleString()
+                                : '-'
+                        }
                     />
                     <VisualDetail
                         size={4}
                         title="Finalized by"
-                        info={project.finalizedBy}
+                        info={
+                            project.finalizedBy
+                                ? new Date(project.finalizedBy).toLocaleString()
+                                : '-'
+                        }
                     />
                 </Grid>
             </Container>
