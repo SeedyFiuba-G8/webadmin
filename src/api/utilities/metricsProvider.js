@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { handleError, handleResponse } from './response';
 
-axios.defaults.baseURL = 'https://sf-tdp2-gateway-dev.herokuapp.com';
+axios.defaults.baseURL = 'https://sf-tdp2-gateway.herokuapp.com';
 
 const metricsSerializer = ({ initialDate, finalDate, userId }) => {
     const initialDateQuery = `initialDate=${encodeURIComponent(
