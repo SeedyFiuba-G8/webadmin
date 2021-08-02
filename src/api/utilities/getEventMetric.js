@@ -53,9 +53,7 @@ async function getEventsProjectsMetricData(
 
     var id = undefined;
     const metricsId = await getEventsProjectsMetric(configId);
-    console.log('el projecto de testeo es ', metricsId);
     if (metricsId.create === undefined) {
-        console.log('aca llegue');
         setOpen(true);
         setUserIdValue(undefined);
         setTempValue('');
@@ -66,7 +64,6 @@ async function getEventsProjectsMetricData(
 
     setIsLoading(false);
 
-    console.log('response', metricsId);
     switch (dateVariation) {
         case dateRange.DAILY:
             const lastDay = new Date(

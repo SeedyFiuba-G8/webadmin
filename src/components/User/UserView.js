@@ -10,10 +10,11 @@ export default function UserView(props) {
 
     useEffect(() => {
         const loadUser = async () => {
-            const userData = await getUser(props.id);
-            if (!mountedRef.current) return;
-            setUser(userData);
-        }
+            getUser(props.id).then((userData) => {
+                if (!mountedRef.current) return;
+                setUser(userData);
+            });
+        };
         loadUser();
     }, [props.id]);
 
@@ -51,7 +52,11 @@ export default function UserView(props) {
                     <VisualDetail
                         size={4}
                         title="Signup Date"
-                        info={user.signupDate}
+                        info={
+                            user.signupDate
+                                ? new Date(user.signupDate).toLocaleString()
+                                : '-'
+                        }
                     />
                     <VisualDetail
                         size={4}

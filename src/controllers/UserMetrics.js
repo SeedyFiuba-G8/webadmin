@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Grid, Select, MenuItem, Input } from '@material-ui/core';
 import { withRouter } from 'react-router';
 import classnames from 'classnames';
@@ -16,9 +16,16 @@ import ProfitSection from '../components/ProfitSection';
 
 function UserMetrics(props) {
     const [metrics, setMetrics] = useState([]);
+
+    const mountedRef = useRef(true);
+
     useEffect(() => {
-        const LoadMetrics = async () => setMetrics(await getBasicUsersMetric());
-        LoadMetrics();
+        const loadMetrics = async () => {
+            const projectMetrics = await getBasicUsersMetric();
+            if (!mountedRef.current) return;
+            setMetrics(projectMetrics);
+        };
+        loadMetrics();
     }, []);
     var classes = getStyles();
 
@@ -26,9 +33,14 @@ function UserMetrics(props) {
 
     const [metricsEvent, setMetricsEvent] = useState(defaultData);
     useEffect(() => {
-        const LoadMetrics = async () =>
-            setMetricsEvent(await getEventsUsersMetricData(dateVariation));
-        LoadMetrics();
+        const loadMetrics = async () => {
+            const metricsEventData = await getEventsUsersMetricData(
+                dateVariation
+            );
+            if (!mountedRef.current) return;
+            setMetricsEvent(metricsEventData);
+        };
+        loadMetrics();
     }, [dateVariation]);
 
     return (
@@ -40,7 +52,7 @@ function UserMetrics(props) {
                         header={
                             <div className={classes.title}>
                                 <Typography variant="h4">
-                                    Specific Metrics
+                                    General Statistics
                                 </Typography>
                             </div>
                         }
@@ -124,7 +136,7 @@ function UserMetrics(props) {
                             header={
                                 <div className={classes.title}>
                                     <Typography variant="h4">
-                                        General Metrics
+                                        Specific Metrics
                                     </Typography>
 
                                     <Select

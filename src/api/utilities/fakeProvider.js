@@ -44,7 +44,6 @@ function get(resource, params) {
             };
         }
         default: {
-            console.log('error');
         }
     }
 }

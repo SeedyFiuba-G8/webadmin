@@ -5,8 +5,6 @@ export async function getAllUsers(config) {
         const response = await apiProvider.get('users', config);
         return response.users;
     } catch (error) {
-        console.error(error);
-        console.log("Couldn't get users.");
         return [];
     }
 }
@@ -16,8 +14,6 @@ export async function getUser(id) {
         const user = await apiProvider.get(`users/${id}`);
         return user;
     } catch (error) {
-        console.error(error);
-        console.log("Couldn't get user.");
         return [];
     }
 }
@@ -27,8 +23,6 @@ export async function banUser(id) {
         const response = await apiProvider.post(`users/${id}/ban`);
         return response;
     } catch (error) {
-        console.error(error);
-        console.log("Couldn't ban user.");
         return [];
     }
 }
@@ -37,8 +31,6 @@ export async function unbanUser(id) {
         const response = await apiProvider.del(`users/${id}/ban`);
         return response;
     } catch (error) {
-        console.error(error);
-        console.log("Couldn't unban user.");
         return [];
     }
 }

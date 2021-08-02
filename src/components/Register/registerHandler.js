@@ -14,10 +14,8 @@ export default async function registerHandler(
     setEmail('');
     if (response.registerSuccessful) {
         setSuccessOpen(true);
-        console.log('Register successful!');
     } else {
         setErrorOpen(true);
         setError(response.error);
-        console.log('error es ');
     }
 }

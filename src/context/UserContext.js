@@ -73,11 +73,8 @@ async function loginFunction(
         setIsLoading(false);
         loginDispatch({ type: 'LOGIN_SUCCESS' });
 
-        console.log('Login Success!');
-
         redirect('/app');
     } else {
-        console.log('Login Failed!');
         loginDispatch({ type: 'LOGIN_FAILURE' });
         setError(true);
         setIsLoading(false);
@@ -95,6 +92,5 @@ function signOut(dispatch, history) {
     localStorage.removeItem('token');
     apiProvider.updateAuthToken();
     dispatch({ type: 'SIGN_OUT_SUCCESS' });
-    console.log('Signed out.');
     history.push('/login');
 }

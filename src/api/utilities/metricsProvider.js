@@ -18,13 +18,11 @@ const metricsSerializer = ({ initialDate, finalDate, userId }) => {
 
 const updateAuthToken = async () => {
     var token = localStorage.getItem('token');
-    console.log(`Setting auth token: ${token}`);
     if (token) axios.defaults.headers['Authorization'] = `Bearer ${token}`;
     else axios.defaults.headers['Authorization'] = undefined;
 };
 
 const get = async (resource, params) => {
-    console.log(`Getting: ${resource}`);
     await updateAuthToken();
     try {
         const response = await axios.get(resource, {
