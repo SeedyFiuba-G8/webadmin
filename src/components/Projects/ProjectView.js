@@ -4,7 +4,6 @@ import ProjectStyle from './ProjectStyle';
 import VisualDetail from '../VisualDetail';
 import VisualBlockedButton from '../VisualProjectBlockedButton';
 import { CssBaseline, Grid, Container, Typography } from '@material-ui/core';
-import TemporaryImg from '../../assets/temporary-img.jpg';
 
 export default function ProjectView(props) {
     const [project, setProject] = useState({});
@@ -22,64 +21,64 @@ export default function ProjectView(props) {
     const projectStyle = {
         title: project.title,
         description: project.description,
-        image: TemporaryImg,
+        image: project.coverPicUrl,
         imgText: 'main image description',
     };
 
     return (
         <>
             <CssBaseline />
-            <Container maxWidth='lg'>
+            <Container maxWidth="lg">
                 <ProjectStyle post={projectStyle} />
-                <Typography variant='h3' gutterBottom>
+                <Typography variant="h3" gutterBottom>
                     Project Status
                 </Typography>
                 <Grid container spacing={2}>
                     <VisualBlockedButton
                         size={4}
-                        title='Block'
+                        title="Block"
                         blocked={project.blocked}
                         id={project.id}
                     />
                 </Grid>
-                <Typography variant='h3' gutterBottom>
+                <Typography variant="h3" gutterBottom>
                     General Info
                 </Typography>
 
                 <Grid container spacing={2}>
                     <VisualDetail
                         size={4}
-                        title='Objective'
+                        title="Objective"
                         info={project.objective}
                     />
                 </Grid>
 
-                <Typography variant='h3' gutterBottom>
+                <Typography variant="h3" gutterBottom>
                     Location
                 </Typography>
 
                 <Grid container spacing={2}>
+                    <VisualDetail size={4} title="Latitud" info={project.lat} />
                     <VisualDetail
                         size={4}
-                        title='Country'
-                        info={project.country}
+                        title="Longitud"
+                        info={project.long}
                     />
-                    <VisualDetail size={4} title='City' info={project.city} />
                 </Grid>
 
-                <Typography variant='h3' gutterBottom>
+                <Typography variant="h3" gutterBottom>
                     Timeline
                 </Typography>
 
                 <Grid container spacing={2}>
                     <VisualDetail
                         size={4}
-                        title='Published on'
+                        title="Published on"
                         info={project.publishedOn}
                     />
                     <VisualDetail
                         size={4}
-                        title='Finalized by'
+                        title="Finalized by"
                         info={project.finalizedBy}
                     />
                 </Grid>
