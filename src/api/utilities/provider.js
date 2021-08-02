@@ -5,7 +5,7 @@ import { handleError, handleResponse } from './response';
 axios.defaults.baseURL = _.get(
     process.env,
     'BASE_URL',
-    'https://sf-tdp2-gateway-dev.herokuapp.com'
+    'https://sf-tdp2-gateway.herokuapp.com'
 );
 
 const updateAuthToken = async () => {
