@@ -22,7 +22,7 @@
         "web-vitals": "^1.1.2"
     },
     "scripts": {
-        "postinstall": "react-scripts build",
+        "start": "node --max_old_space_size=2560 node_modules/.bin/react-scripts build",
         "build": "node --max_old_space_size=2560 node_modules/.bin/react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
