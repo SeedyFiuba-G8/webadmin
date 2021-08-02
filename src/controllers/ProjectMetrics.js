@@ -221,6 +221,7 @@ function ProjectMetrics(props) {
                                                 size="large"
                                                 style={{
                                                     display: 'flex',
+                                                    left: 20,
                                                 }}
                                             >
                                                 Apply
