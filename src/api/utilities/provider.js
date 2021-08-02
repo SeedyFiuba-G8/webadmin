@@ -2,17 +2,19 @@ import axios from 'axios';
 import _ from 'lodash';
 import { handleError, handleResponse } from './response';
 
-axios.defaults.baseURL = _.get(process.env, 'BASE_URL', 'https://sf-tdp2-gateway-dev.herokuapp.com');
+axios.defaults.baseURL = _.get(
+    process.env,
+    'BASE_URL',
+    'https://sf-tdp2-gateway-dev.herokuapp.com'
+);
 
 const updateAuthToken = async () => {
     var token = localStorage.getItem('token');
-    console.log(`Setting auth token: ${token}`);
     if (token) axios.defaults.headers['Authorization'] = `Bearer ${token}`;
     else axios.defaults.headers['Authorization'] = undefined;
 };
 
 const post = async (resource, payload) => {
-    console.log(`Posting to: ${resource}`);
     try {
         const response = await axios.post(resource, payload);
         return await handleResponse(response);
@@ -22,7 +24,6 @@ const post = async (resource, payload) => {
 };
 
 const get = async (resource, params) => {
-    console.log(`Getting: ${resource}`);
     await updateAuthToken();
     try {
         const response = await axios.get(resource, { params: params });
@@ -33,7 +34,6 @@ const get = async (resource, params) => {
 };
 
 const del = async (resource) => {
-    console.log(`deleting : ${resource}`);
     try {
         const response = await axios.delete(resource);
         return await handleResponse(response);

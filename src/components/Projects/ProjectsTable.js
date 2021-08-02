@@ -22,7 +22,6 @@ function ProjectsTable(props) {
                 setIsLoading(false);
             });
         };
-        console.log('Reloading with config: ', config);
         loadData();
     }, [config]);
 
@@ -40,17 +39,10 @@ function ProjectsTable(props) {
     }
 
     function changeRowsPerPage(rows) {
-        console.log('changed page number');
         updateConfig({ limit: rows });
     }
 
-    function sortByColumn(column, direction) {
-        console.log('Columns sort by:', column, 'direction:', direction);
-        // updateConfig({
-        //     sortColumn: column,
-        //     sortAsc: direction === 'asc' ? true : false,
-        // });
-    }
+    function sortByColumn(column, direction) {}
 
     function removeField(field) {
         var config_aux = { ...config };
@@ -59,14 +51,12 @@ function ProjectsTable(props) {
     }
 
     function changeFilters(columnChanged, filterList, changedColumnIndex) {
-        console.log('cambiando config:', filterList);
         if (changedColumnIndex == null) {
             setConfig({
                 limit: 3,
                 offset: 0,
             });
         } else if (filterList[changedColumnIndex].length === 0) {
-            console.log('Removed field:', columnChanged);
             removeField(columnChanged);
         } else {
             var update = {};
