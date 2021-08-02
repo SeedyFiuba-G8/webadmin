@@ -201,7 +201,7 @@ function ProjectMetrics(props) {
                                         fullWidth
                                     />
                                 </Grid>
-                                <Grid item xs={4}>
+                                <Grid item xs={6}>
                                     <div style={{ display: 'flex', flex: 1 }}>
                                         {isLoading ? (
                                             <CircularProgress
