@@ -50,8 +50,15 @@ function ProjectsTable(props) {
         setConfig(config_aux);
     }
 
-    function changeFilters(columnChanged, filterList, changedColumnIndex) {
-        if (changedColumnIndex == null) {
+    function changeFilters(
+        columnChanged,
+        filterList,
+        type,
+        changedColumnIndex
+    ) {
+        console.log('columna que esta cambiando es ', changedColumnIndex);
+        console.log('filter list', filterList);
+        if (type === 'reset') {
             setConfig({
                 limit: 3,
                 offset: 0,
@@ -69,7 +76,7 @@ function ProjectsTable(props) {
         <MUIDataTable
             title={'All system projects'}
             data={projects}
-            columns={projects.length > 0 ? columns : []}
+            columns={columns}
             options={{
                 textLabels: {
                     body: {
@@ -99,6 +106,7 @@ function ProjectsTable(props) {
                     changeFilters(
                         columnChanged,
                         filterList,
+                        type,
                         changedColumnIndex
                     );
                 },

@@ -69,7 +69,7 @@ function UsersTable(props) {
             <MUIDataTable
                 title={'All system users'}
                 data={users}
-                columns={users.length > 0 ? columns : []}
+                columns={columns}
                 options={{
                     textLabels: {
                         body: {
