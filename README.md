@@ -6,9 +6,11 @@ Written in JavaScript (React.js).
 
 Since we used **Heroku** to host our microservices, as they offer a limited number of free applications, we decided to remove them. CI/CD has been manually disabled.
 
-If you were to deploy this application, you should:
+If you were to deploy this application (from Heroku), you should:
 
--   Manually enable the workflow from GitHub Actions.
--   Create your Heroku app to host our `main` (and optionally `dev` branch).
--   Setup **secrets** needed by our workflow (mainly Heroku credentials and application name).
+-   Create your Heroku app to host the `main` (or other) branch of our project.
+-   Add the following buildpacks for your app (from the Settings tab):
+  -   heroku/nodejs
+  -   https://buildpack-registry.s3.amazonaws.com/buildpacks/mars/create-react-app.tgz
+-   Enable automatic deploys (from the Deploy tab) connecting to the desired branch on your forked repository.
 -   **Happy coding!**
